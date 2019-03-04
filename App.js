@@ -2,20 +2,32 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Navigation from './src/navigation'
 import {Provider} from 'react-redux'
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import FBSDK from 'react-native-fbsdk'
 import store from './src/store'
 import {
   authCheck
 } from './src/modules/auth/store/actions'
 store().dispatch(authCheck())
-
+const { AccessToken } = FBSDK
 type Props = {};
 export default class App extends Component<Props> {
+  constructor(props){
+    super(props);
+    this.state = {
+      accessToken:null
+    }
+  }
+  componentDidMount() {
+    AccessToken.getCurrentAccessToken()
+    .then((data) => {
+      this.setState({
+        accessToken: data.accessToken
+      })
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
   render() {
     return this.InitApp()
   }
@@ -25,15 +37,6 @@ export default class App extends Component<Props> {
         <Navigation/>
       </Provider>
       
-    )
-  }
-  initExample(){
-    return( 
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
     )
   }
 }

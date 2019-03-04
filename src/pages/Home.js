@@ -1,17 +1,63 @@
 import React, { Component } from 'react'
-import { View,StyleSheet,Dimensions } from 'react-native'
-var { height } = Dimensions.get('window');
+import { View,StyleSheet,Dimensions,Text,Image } from 'react-native'
+import Swiper from 'react-native-swiper'
+import {ListItem} from 'react-native-elements'
+import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
+import LinearGradient from 'react-native-linear-gradient'; // Only if no expo
+var { height,width } = Dimensions.get('window');
 var box_count = 3;
 var box_height = height / box_count;
+const list = [
+  {
+    name: 'Amy Farha',
+    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+    subtitle: 'Vice President'
+  },
+  {
+    name: 'Chris Jackson',
+    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+    subtitle: 'Vice Chairman'
+  },
+]
 export default class Home extends Component{
     render(){
         return (
             <View style={styles.container}>
-                <View style={[styles.box, styles.box1]}></View>
+                <Swiper style={styles.wrapper} showsButtons={true} height={230}>
+                  <View style={styles.slide1}>
+                    <Text style={styles.text}>Hello Swiper</Text>
+                  </View>
+                  <View style={styles.slide2}>
+                    <Text style={styles.text}>Beautiful</Text>
+                  </View>
+                  <View style={styles.slide3}>
+                    <Image resizeMode='stretch' style={styles.image} source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}/>
+                    <Text style={styles.text}>And simple</Text>
+                  </View>
+                </Swiper>
+                <ListItem
+                  Component={TouchableScale}
+                  friction={90} //
+                  tension={100} // These props are passed to the parent component (here TouchableScale)
+                  activeScale={0.95} //
+                  linearGradientProps={{
+                    colors: ['#FF9800', '#F44336'],
+                    start: [0, 0],
+                    end: [0.2, 0],
+                  }}
+                  ViewComponent={LinearGradient} // Only if no expo
+                  leftAvatar={{ rounded: true, source: { uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' } }}
+                  title="Chris Jackson"
+                  titleStyle={{ color: 'white', fontWeight: 'bold' }}
+                  subtitleStyle={{ color: 'white' }}
+                  subtitle="Vice Chairman"
+                  chevronColor="white"
+                  chevron
+                />;
+                {/* <View style={[styles.box, styles.box1]}></View>
                 <View style={[styles.box, styles.box2]}></View>
-                <View style={[styles.box, styles.box3]}></View>
+                <View style={[styles.box, styles.box3]}></View> */}
             </View>
-
         )
     }
 }
@@ -32,5 +78,32 @@ const styles = StyleSheet.create({
     },
     box3: {
       backgroundColor: '#e3aa1a'
+    },
+    slide1: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#9DD6EB',
+    },
+    slide2: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#97CAE5',
+    },
+    slide3: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#92BBD9',
+    },
+    text: {
+      color: '#fff',
+      fontSize: 30,
+      fontWeight: 'bold',
+    },
+    image: {
+      width,
+      flex: 1
     }
   });
