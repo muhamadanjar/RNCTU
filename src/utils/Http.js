@@ -7,7 +7,7 @@ const API_URL = (process.env.NODE_ENV === 'test') ? process.env.BASE_URL || (`ht
 
 axios.defaults.baseURL = API_URL;
 axios.defaults.headers.common.Accept = 'application/json';
-axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
+// axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 axios.interceptors.response.use(

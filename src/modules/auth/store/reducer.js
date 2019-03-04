@@ -6,7 +6,7 @@ import {
   AUTH_REFRESH_TOKEN,
   AUTH_RESET_PASSWORD,
 } from './action-types';
-
+import {AsyncStorage} from 'react-native';
 const initialState = {
   isAuthenticated: false,
 };
@@ -28,7 +28,7 @@ const reducer = (state = initialState, { type, payload = null }) => {
 };
 
 function login(state, payload) {
-    localStorage.setItem('access_token', payload);
+  AsyncStorage.setItem('access_token', payload);
     HTTP.defaults.headers.common['Authorization'] = `Bearer ${payload}`;
 
     return {
@@ -38,18 +38,18 @@ function login(state, payload) {
 
 function checkAuth(state) {
     state = Object.assign({}, state, {
-        isAuthenticated: !!localStorage.getItem('access_token')
+        isAuthenticated: !!AsyncStorage.getItem('access_token')
     })
 
     if (state.isAuthenticated) {
-        HTTP.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
+        HTTP.defaults.headers.common['Authorization'] = `Bearer ${AsyncStorage.getItem('access_token')}`;
     }
 
     return state;
 }
 
 function logout(state) {
-    localStorage.removeItem('access_token')
+  AsyncStorage.removeItem('access_token')
     return {
         ...state, isAuthenticated: false
     }

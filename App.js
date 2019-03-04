@@ -12,7 +12,7 @@ import store from './src/store'
 import {
   authCheck
 } from './src/modules/auth/store/actions'
-store.dispatch(authCheck())
+store().dispatch(authCheck())
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -21,7 +21,7 @@ export default class App extends Component<Props> {
   }
   InitApp(){
     return (
-      <Provider store={store}>
+      <Provider store={store()}>
         <Navigation/>
       </Provider>
       
