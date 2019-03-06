@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { View,StyleSheet,Dimensions,Text,Image } from 'react-native'
 import Swiper from 'react-native-swiper'
 import {ListItem} from 'react-native-elements'
-import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
-import LinearGradient from 'react-native-linear-gradient'; // Only if no expo
+import TouchableScale from 'react-native-touchable-scale'
+import LinearGradient from 'react-native-linear-gradient'
 var { height,width } = Dimensions.get('window');
 var box_count = 3;
 var box_height = height / box_count;
@@ -35,25 +35,32 @@ export default class Home extends Component{
                     <Text style={styles.text}>And simple</Text>
                   </View>
                 </Swiper>
-                <ListItem
-                  Component={TouchableScale}
-                  friction={90} //
-                  tension={100} // These props are passed to the parent component (here TouchableScale)
-                  activeScale={0.95} //
-                  linearGradientProps={{
-                    colors: ['#FF9800', '#F44336'],
-                    start: [0, 0],
-                    end: [0.2, 0],
-                  }}
-                  ViewComponent={LinearGradient} // Only if no expo
-                  leftAvatar={{ rounded: true, source: { uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' } }}
-                  title="Chris Jackson"
-                  titleStyle={{ color: 'white', fontWeight: 'bold' }}
-                  subtitleStyle={{ color: 'white' }}
-                  subtitle="Vice Chairman"
-                  chevronColor="white"
-                  chevron
-                />;
+                {
+                  list.map((l, i) => (
+                    <ListItem
+                      key={i}
+                      leftAvatar={{ source: { uri: l.avatar_url } }}
+                      title={l.name}
+                      subtitle={l.subtitle}
+                      Component={TouchableScale}
+                      activeScale={0.95}
+                      friction={90}
+                      tension={100}
+                      ViewComponent={LinearGradient}
+                      linearGradientProps={{
+                        colors: ['#FF9800', '#F44336'],
+                      }}
+                    />
+                  ))
+                }
+                <Card title="CARD WITH DIVIDER">
+                  <View>
+                    <Text>Mobil</Text>
+                  </View>
+                  <View>
+                    <Text>Sewa</Text>
+                  </View>
+                </Card>
                 {/* <View style={[styles.box, styles.box1]}></View>
                 <View style={[styles.box, styles.box2]}></View>
                 <View style={[styles.box, styles.box3]}></View> */}
