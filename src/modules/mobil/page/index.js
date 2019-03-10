@@ -10,26 +10,47 @@ import {
 	getListMobil,
 	getPesananNotComplete
 } from "../store/actions";
+import { connect } from 'react-redux'
+const region = {
+	latitude:-6.3252738,
+	longitude:106.0764884,
+	latitudeDelta:0.0922,
+	longitudeDelta:0.0421
+}
 class Mobil extends Component{
+	
+	componentDidMount() {
+		var rx = this;
+		this.props.getCurrentLocation();
+		setTimeout(function(){
+			console.log('get');
+			// rx.props.getNearByDrivers();
+			
+		}, 1000);
+	}
     render(){
+		console.log(this.state)
+		const { status } = this.props.booking;
+		return(
         <View style={{flex:1}}>
-					{this.props.region.latitude &&
-						<MobilFormContainer region={this.props.region} 
-							getInputData={this.props.getInputData}
-							toggleSearchResultModal={this.props.toggleSearchResultModal}
-							getAddressPredictions={this.props.getAddressPredictions}
-							resultTypes={this.props.resultTypes}
-							predictions={this.props.predictions}
-							getSelectedAddress={this.props.getSelectedAddress}
-							selectedAddress={this.props.selectedAddress}
-							navigation={this.props.navigation}
-							carMarker={carMarker}
-							getCurrentLocation={this.props.getCurrentLocation}
-							nearByDrivers={this.props.nearByDrivers}
-							getPesananNotComplete={this.props.getPesananNotComplete}
-						/>
-					}
+			{/* {this.props.region.latitude &&
+				<MobilFormContainer region={this.props.region} 
+					getInputData={this.props.getInputData}
+					toggleSearchResultModal={this.props.toggleSearchResultModal}
+					getAddressPredictions={this.props.getAddressPredictions}
+					resultTypes={this.props.resultTypes}
+					predictions={this.props.predictions}
+					getSelectedAddress={this.props.getSelectedAddress}
+					selectedAddress={this.props.selectedAddress}
+					navigation={this.props.navigation}
+					carMarker={carMarker}
+					getCurrentLocation={this.props.getCurrentLocation}
+					nearByDrivers={this.props.nearByDrivers}
+					getPesananNotComplete={this.props.getPesananNotComplete}
+				/> */}
+			}
         </View>
+		)
     }
 }
 
@@ -40,7 +61,7 @@ Mobil.navigationOptions = {
 };
 
 const mapStateToProps = (state) => ({
-	region: state.mobil.region,
+	region: state.mobil.region || {},
 	inputData:state.mobil.inputData || {},
 	resultTypes:state.mobil.resultTypes || {},
 	predictions:state.mobil.predictions ||  [],

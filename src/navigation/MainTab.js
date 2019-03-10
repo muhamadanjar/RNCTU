@@ -7,7 +7,7 @@ import LoginScreen from '../pages/Login'
 import SettingsScreen from '../pages/Setting'
 import MobilScreen from '../pages/Mobil'
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+  Home: MobilScreen,
 });
 
 HomeStack.navigationOptions = {

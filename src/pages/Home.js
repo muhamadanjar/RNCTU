@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View,StyleSheet,Dimensions,Text,Image } from 'react-native'
 import Swiper from 'react-native-swiper'
-import {ListItem} from 'react-native-elements'
+import {ListItem,Card} from 'react-native-elements'
 import TouchableScale from 'react-native-touchable-scale'
 import LinearGradient from 'react-native-linear-gradient'
 var { height,width } = Dimensions.get('window');
