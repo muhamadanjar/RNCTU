@@ -13,12 +13,11 @@ import {
     GET_MOBIL_AVAILABLE,
     GET_SELECTED_CAR,
     BOOK_CAR,
-    GET_NEARBY_DRIVERS
+    GET_NEARBY_DRIVERS,
+    GET_ADDRESS_PREDICTIONS
     
   } from './action-types';
-
-
-
+  import RNGooglePlaces from 'react-native-google-places';
   export function getCurrentLocation(){
     return(dispatch)=>{
       navigator.geolocation.getCurrentPosition(
@@ -56,6 +55,7 @@ import {
   
   export function getAddressPredictions(){
     return(dispatch, store)=>{
+      console.log(store());
       let userInput = store().mobil.resultTypes.pickUp ? store().mobil.inputData.pickUp : store().mobil.inputData.dropOff;
       RNGooglePlaces.getAutocompletePredictions(userInput,
         {

@@ -3,6 +3,7 @@ package com.rnctu;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.arttitude360.reactnative.rngoogleplaces.RNGooglePlacesPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -36,6 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNGooglePlacesPackage(),
             new LinearGradientPackage(),
             new FBSDKPackage(mCallbackManager),
             new RNGestureHandlerPackage(),

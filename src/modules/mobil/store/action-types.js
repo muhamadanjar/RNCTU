@@ -19,6 +19,7 @@ export const BOOKING_CANCELED = 'BOOKING_CANCELED'
 export const BOOKING_CONFIRMED = 'BOOKING_CONFIRMED'
 
 
+
 export default {
   AUTH_CHECK,
   AUTH_LOGIN,

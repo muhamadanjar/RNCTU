@@ -26,8 +26,8 @@ const LONGITUDE_DELTA = ASPECT_RATIO * LATITUDE_DELTA
 const reducer = (state = initialState, { type, payload = null }) => {
     switch(type) {
       case GET_INPUT:
-      //return { ...state, inputData:action.payload};
-      const { key, value } = action.payload;
+      //return { ...state, inputData:payload};
+      const { key, value } = payload;
       return update(state, {
         inputData:{
           [key]:{
@@ -53,7 +53,7 @@ const reducer = (state = initialState, { type, payload = null }) => {
         }
       })
     case TOGGLE_SEARCH_RESULT:
-      if(action.payload === "pickUp"){
+      if(payload === "pickUp"){
         return update(state, {
           resultTypes:{
             pickUp:{
@@ -69,7 +69,7 @@ const reducer = (state = initialState, { type, payload = null }) => {
     
         });
       }
-      if(action.payload === "dropOff"){
+      if(payload === "dropOff"){
         return update(state, {
           resultTypes:{
             pickUp:{
@@ -88,7 +88,7 @@ const reducer = (state = initialState, { type, payload = null }) => {
     case GET_ADDRESS_PREDICTIONS:
       return update(state, {
         predictions:{
-          $set:action.payload
+          $set:payload
         }
       })
     case GET_SELECTED_ADDRESS:
@@ -96,7 +96,7 @@ const reducer = (state = initialState, { type, payload = null }) => {
       return update(state, {
         selectedAddress:{
           [selectedTitle]:{
-            $set:action.payload
+            $set:payload
           }		
         },
         resultTypes:{
@@ -111,47 +111,47 @@ const reducer = (state = initialState, { type, payload = null }) => {
     case GET_DISTANCE_MATRIX:
       return update(state, {
         distanceMatrix:{
-          $set:action.payload
+          $set:payload
         }
       })
     case GET_FARE:
       return update(state, {
         fare:{
-          $set:action.payload
+          $set:payload
         }
       })
     case 'GET_FARE2':
       return update(state, {
         fare2:{
-          $set:action.payload
+          $set:payload
         }
       })
     case GET_MOBIL_AVAILABLE:
       return update(state, {
         mobilavailable:{
-          $set:action.payload
+          $set:payload
         }
       })
     case GET_SELECTED_CAR:
       return update(state, {
         selectedCar:{
-          $set:action.payload
+          $set:payload
         },
         currentSewa:{
-          $set:action.payload.id
+          $set:payload.id
         }
       })
     case BOOK_CAR:
       return update(state, {
         booking:{
-          $set:action.payload
+          $set:payload
         }
       })
     case BOOKING_CANCELED:
       return update(state, {
         booking:{
           status:{
-            $set:action.payload
+            $set:payload
           }
         }
       })
@@ -159,20 +159,20 @@ const reducer = (state = initialState, { type, payload = null }) => {
       return update(state, {
         booking:{
           status:{
-            $set:action.payload
+            $set:payload
           }
         }
       })
     case GET_INTERVAL_BOOK:
       return update(state, {
         intervalbook:{
-          $set:action.payload
+          $set:payload
         }
       })
     case GET_NEARBY_DRIVERS:
       return update(state, {
         nearByDrivers:{
-          $set:action.payload
+          $set:payload
         }
     });
       default:
