@@ -23,13 +23,14 @@ import {
     return(dispatch)=>{
       navigator.geolocation.getCurrentPosition(
         (position)=>{
+          console.log(position);
           dispatch({
             type:GET_CURRENT_LOCATION,
             payload:position
           });
         },
         (error)=> console.log(error.message),
-        {enableHighAccuracy: true, timeout: 20000, maximumAge:1000}
+        {enableHighAccuracy: true, timeout: 20000, maximumAge:3600000}
       );
     }
   }
@@ -136,24 +137,6 @@ import {
     }
   }
   
-  function handleGetCurrentLocation(state, action){
-    return update(state, {
-      region:{
-        latitude:{
-          $set:action.payload.coords.latitude
-        },
-        longitude:{
-          $set:action.payload.coords.longitude
-        },
-        latitudeDelta:{
-          $set:LATITUDE_DELTA
-        },
-        longitudeDelta:{
-          $set:LONGITUDE_DELTA
-        }
-      }
-    })
-  }
   
   export function getListMobil(){
     return(dispatch, store)=>{

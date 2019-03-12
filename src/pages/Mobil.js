@@ -11,12 +11,14 @@ import {
 	getPesananNotComplete
 } from "../modules/mobil/store/actions";
 import { connect } from 'react-redux'
+import MobilFormContainer from '../modules/mobil/page/MobilFormContainer'
 const region = {
 	latitude:-6.3252738,
 	longitude:106.0764884,
 	latitudeDelta:0.0922,
 	longitudeDelta:0.0421
 }
+const carMarker = require('../assets/img/carMarker.png');
 import {View,Text} from 'react-native'
 class Mobil extends Component{
 	

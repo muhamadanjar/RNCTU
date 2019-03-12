@@ -1,5 +1,6 @@
 import HTTP from '../../../utils/Http';
 import {Dimensions} from 'react-native';
+import update from 'react-addons-update';
 import {
     GET_INPUT,
     GET_CURRENT_LOCATION,
@@ -38,10 +39,10 @@ const reducer = (state = initialState, { type, payload = null }) => {
       return update(state, {
         region:{
           latitude:{
-            $set:action.payload.coords.latitude
+            $set:payload.coords.latitude
           },
           longitude:{
-            $set:action.payload.coords.longitude
+            $set:payload.coords.longitude
           },
           latitudeDelta:{
             $set:LATITUDE_DELTA
