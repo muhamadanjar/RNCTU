@@ -6,7 +6,8 @@ import {
   AUTH_REFRESH_TOKEN,
   AUTH_RESET_PASSWORD,
 } from './action-types';
-import {AsyncStorage} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+
 const initialState = {
   isAuthenticated: false,
 };

@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Navigation from './src/navigation'
 import {Provider} from 'react-redux'
-import FBSDK from 'react-native-fbsdk'
+// import FBSDK from 'react-native-fbsdk'
 import store from './src/store'
 import {
   authCheck
 } from './src/modules/auth/store/actions'
 store().dispatch(authCheck())
-const { AccessToken } = FBSDK
+// const { AccessToken } = FBSDK
 export default class App extends Component {
   constructor(props){
     super(props);
@@ -17,15 +17,15 @@ export default class App extends Component {
     }
   }
   componentDidMount() {
-    AccessToken.getCurrentAccessToken()
-    .then((data) => {
-      this.setState({
-        accessToken: data.accessToken
-      })
-    })
-    .catch(error => {
-      console.log(error)
-    })
+    // AccessToken.getCurrentAccessToken()
+    // .then((data) => {
+    //   this.setState({
+    //     accessToken: data.accessToken
+    //   })
+    // })
+    // .catch(error => {
+    //   console.log(error)
+    // })
   }
   render() {
     return this.InitApp()
