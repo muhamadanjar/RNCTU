@@ -26,7 +26,6 @@ const LONGITUDE_DELTA = ASPECT_RATIO * LATITUDE_DELTA
 const reducer = (state = initialState, { type, payload = null }) => {
     switch(type) {
       case GET_INPUT:
-      //return { ...state, inputData:payload};
       const { key, value } = payload;
       return update(state, {
         inputData:{

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Navigation from './src/navigation'
 import {Provider} from 'react-redux'
-// import FBSDK from 'react-native-fbsdk'
 import store from './src/store'
 import {
   authCheck

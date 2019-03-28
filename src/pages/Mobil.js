@@ -26,9 +26,7 @@ class Mobil extends Component{
 		var rx = this;
 		this.props.getCurrentLocation();
 		setTimeout(function(){
-			console.log('get');
 			// rx.props.getNearByDrivers();
-			
 		}, 1000);
 	}
     render(){
@@ -88,4 +86,3 @@ const mapActionCreators = {
 };
 
 export default connect(mapStateToProps, mapActionCreators)(Mobil);
-// export default Mobil;
