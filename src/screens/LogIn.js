@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ActionCreators from '../modules/auth/store/actions';
 import colors from '../utils/Colors';
-import transparentHeaderStyle from '../styles/navigation';
+import transparentHeaderStyle from '../utils/navigation.styles';
 import InputField from '../components/form/InputField';
 import NextArrowButton from '../components/buttons/NextArrowButton';
 import Notification from '../components/Notification';

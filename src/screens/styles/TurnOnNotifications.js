@@ -1,11 +1,5 @@
-/**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
- */
-
 import { StyleSheet } from 'react-native';
-import colors from '../../styles/colors';
+import colors from '../../utils/Colors';
 
 const styles = StyleSheet.create({
   wrapper: {
