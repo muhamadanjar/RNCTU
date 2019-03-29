@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ActionCreators from '../redux/actions';
+import ActionCreators from '../modules/auth/store/actions';
 import colors from '../utils/Colors';
 import transparentHeaderStyle from '../styles/navigation';
 import InputField from '../components/form/InputField';
