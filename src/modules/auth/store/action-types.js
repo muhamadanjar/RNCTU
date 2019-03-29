@@ -4,6 +4,8 @@ export const AUTH_LOGOUT = 'AUTH_LOGOUT'
 export const AUTH_REFRESH_TOKEN = 'AUTH_REFRESH_TOKEN'
 export const AUTH_RESET_PASSWORD = 'AUTH_RESET_PASSWORD'
 export const AUTH_USER = 'AUTH_USER'
+export const LOG_IN = 'LOG_IN';
+export const SET_LOGGED_IN_STATE = 'SET_LOGGED_IN_STATE';
 
 export default {
   AUTH_CHECK,
@@ -12,4 +14,6 @@ export default {
   AUTH_REFRESH_TOKEN,
   AUTH_RESET_PASSWORD,
   AUTH_USER,
+  LOG_IN,
+  SET_LOGGED_IN_STATE
 }

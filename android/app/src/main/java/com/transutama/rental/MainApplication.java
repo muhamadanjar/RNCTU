@@ -3,12 +3,9 @@ package com.transutama.rental;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.arttitude360.reactnative.rngoogleplaces.RNGooglePlacesPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.airbnb.android.react.maps.MapsPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -29,12 +26,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNGooglePlacesPackage(),
-            new VectorIconsPackage(),
-            new MapsPackage(),
-            new LinearGradientPackage(),
+            new AsyncStoragePackage(),
             new RNGestureHandlerPackage(),
-            new AsyncStoragePackage()
+            new VectorIconsPackage()
       );
     }
 

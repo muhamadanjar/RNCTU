@@ -1,12 +1,6 @@
-/**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
- */
-
 import { StyleSheet } from 'react-native';
-import iPhoneSize from '../../helpers/utils';
-import colors from '../../styles/colors';
+import iPhoneSize from '../../utils/dimensions';
+import colors from '../../utils/Colors'
 
 let termsTextSize = 13;
 let headingTextSize = 30;

@@ -1,10 +1,11 @@
 {
-  "name": "TransUtamaRentalApp",
+  "name": "TransUtamaApp",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "android-linux": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.2.1",
@@ -16,7 +17,7 @@
     "prop-types": "^15.7.2",
     "react": "16.6.3",
     "react-addons-update": "^15.6.2",
-    "react-native": "^0.59.1",
+    "react-native": "^0.59.2",
     "react-native-elements": "^1.1.0",
     "react-native-gesture-handler": "^1.0.16",
     "react-native-google-places": "^2.5.2",

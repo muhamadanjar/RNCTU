@@ -1,9 +1,3 @@
-/**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
- */
-
 import React, { Component } from 'react';
 import {
   Text,
@@ -13,13 +7,13 @@ import {
   ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import colors from '../styles/colors';
-import transparentHeaderStyle from '../styles/navigation';
+import colors from '../utils/Colors';
+import transparentHeaderStyle from '../utils/navigation.styles';
 import RoundedButton from '../components/buttons/RoundedButton';
 import NavBarButton from '../components/buttons/NavBarButton';
 import styles from './styles/LoggedOut';
 
-const airbnbLogo = require('../img/airbnb-logo.png');
+const airbnbLogo = require('../assets/img/airbnb-logo.png');
 
 export default class LoggedOut extends Component {
   static navigationOptions = ({ navigation }) => ({
