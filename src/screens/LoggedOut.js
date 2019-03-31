@@ -17,7 +17,7 @@ const airbnbLogo = require('../assets/img/airbnb-logo.png');
 
 export default class LoggedOut extends Component {
   static navigationOptions = ({ navigation }) => ({
-    headerRight: <NavBarButton handleButtonPress={() => navigation.navigate('LogIn')} location="right" color={colors.white} text="Log In" />,
+    headerRight: <NavBarButton handleButtonPress={() => navigation.navigate('Auth')} location="right" color={colors.white} text="Log In" />,
     headerStyle: transparentHeaderStyle,
     headerTransparent: true,
     headerTintColor: colors.white,
@@ -33,6 +33,7 @@ export default class LoggedOut extends Component {
 
   static onMoreOptionsPress() {
     alert('More options button pressed');
+    this.props.navigation.navigate('Auth')
   }
 
   render() {
@@ -44,7 +45,7 @@ export default class LoggedOut extends Component {
             style={styles.logo}
           />
           <Text style={styles.welcomeText}>
-Welcome to Airbnb.
+Welcome to Trans Utama.
           </Text>
           <RoundedButton
             text="Continue with Facebook"

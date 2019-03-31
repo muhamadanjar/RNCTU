@@ -7,7 +7,7 @@ import HomeScreen from '../pages/Mobil'
 import LoggedOut from '../screens/LoggedOut'
 import LogIn from '../screens/LogIn'
 export default createAppContainer(createSwitchNavigator({
-    // Main: LoggedOut,
+    Main: LoggedOut,
     Auth: LogIn,
     Order:HomeScreen
 }));

@@ -1,9 +1,3 @@
-/**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
- */
-
 import React, { Component } from 'react';
 import {
   View,
@@ -16,7 +10,7 @@ import gql from 'graphql-tag';
 import SearchBar from '../components/SearchBar';
 import Categories from '../components/explore/Categories';
 import Listings from '../components/explore/Listings';
-import colors from '../styles/colors';
+import colors from '../utils/Colors';
 import categoriesList from '../data/categories';
 import listings from '../data/listings';
 
