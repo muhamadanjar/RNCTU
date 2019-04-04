@@ -1,9 +1,3 @@
-/**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
- */
-
 import React, { Component } from 'react';
 import {
   View,
@@ -12,8 +6,8 @@ import {
   ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import colors from '../styles/colors';
-import transparentHeaderStyle from '../styles/navigation';
+import colors from '../utils/Colors';
+import transparentHeaderStyle from '../utils/navigation.styles';
 import InputField from '../components/form/InputField';
 import Notification from '../components/Notification';
 import NextArrowButton from '../components/buttons/NextArrowButton';

@@ -23,16 +23,17 @@ export default class LoggedOut extends Component {
     headerTintColor: colors.white,
   });
 
-  static onFacebookPress() {
-    alert('Facebook button pressed');
+  onFacebookPress() {
+    console.log('Facebook button pressed');
   }
 
-  static onCreateAccountPress() {
-    alert('Create Account button pressed');
+  onCreateAccountPress() {
+    console.log('Create Account button pressed');
+    console.log(this.props);
   }
 
-  static onMoreOptionsPress() {
-    alert('More options button pressed');
+  onMoreOptionsPress() {
+    console.log('More options button pressed');
     this.props.navigation.navigate('Auth')
   }
 
@@ -52,17 +53,17 @@ Welcome to Trans Utama.
             textColor={colors.green01}
             background={colors.white}
             icon={<Icon name="facebook" size={20} style={styles.facebookButtonIcon} />}
-            handleOnPress={this.onFacebookPress}
+            handleOnPress={()=>this.onFacebookPress()}
           />
           <RoundedButton
             text="Create Account"
             textColor={colors.white}
-            handleOnPress={this.onCreateAccountPress}
+            handleOnPress={()=>this.onCreateAccountPress()}
           />
 
           <TouchableHighlight
             style={styles.moreOptionsButton}
-            onPress={this.onMoreOptionsPress}
+            onPress={()=>this.onMoreOptionsPress()}
           >
             <Text style={styles.moreOptionsButtonText}>
               More options
@@ -73,10 +74,10 @@ Welcome to Trans Utama.
               By tapping Continue, Create Account or More
             </Text>
             <Text style={styles.termsText}>
-              {' options,'}
+              {' pilihan,'}
             </Text>
             <Text style={styles.termsText}>
-              {"I agree to Airbnb's "}
+              {"saya setuju dengan Utama Trans"}
             </Text>
             <TouchableHighlight style={styles.linkButton}>
               <Text style={styles.termsText}>

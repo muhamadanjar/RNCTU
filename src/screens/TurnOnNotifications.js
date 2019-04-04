@@ -1,9 +1,3 @@
-/**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
- */
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -13,8 +7,8 @@ import {
   Text,
   TouchableHighlight,
 } from 'react-native';
-import colors from '../styles/colors';
-import transparentHeaderStyle from '../styles/navigation';
+import colors from '../utils/Colors';
+import transparentHeaderStyle from '../utils/navigation.styles';
 import styles from './styles/TurnOnNotifications';
 
 const navigateToTabsAction = NavigationActions.navigate({
