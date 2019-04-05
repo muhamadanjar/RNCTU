@@ -5,7 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import NoResults from '../components/saved/NoResults';
-import colors from '../styles/colors';
+import colors from '../utils/Colors';
 
 export default class SavedContainer extends Component {
   render() {

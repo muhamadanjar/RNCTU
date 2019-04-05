@@ -1,9 +1,3 @@
-/**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
- */
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import {
@@ -17,8 +11,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import ActionCreators from '../redux/actions';
-import colors from '../styles/colors';
+import * as ActionCreators from '../modules/auth/store/actions';
+import colors from '../utils/Colors';
 import InputField from '../components/form/InputField';
 import RadioInput from '../components/form/RadioInput';
 import RoundedButton from '../components/buttons/RoundedButton';

@@ -5,8 +5,8 @@ import {
   ScrollView,
   StyleSheet,
 } from 'react-native';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+// import { graphql } from 'react-apollo';
+// import gql from 'graphql-tag';
 import SearchBar from '../components/SearchBar';
 import Categories from '../components/explore/Categories';
 import Listings from '../components/explore/Listings';
@@ -71,9 +71,9 @@ class ExploreContainer extends Component {
   }
 
   render() {
-    const { data } = this.props;
-
-    console.log(data.multipleListings)
+    const { data,navigation } = this.props;
+    const { navigate} = navigation;
+    console.log(data)
 
     return (
       <View style={styles.wrapper}>
@@ -86,7 +86,7 @@ class ExploreContainer extends Component {
 Explore Airbnb
           </Text>
           <View style={styles.categories}>
-            <Categories categories={categoriesList} />
+            <Categories categories={categoriesList} handleOnPress={()=>navigate('Order')} />
           </View>
           {this.renderListings()}
         </ScrollView>
@@ -119,15 +119,15 @@ const styles = StyleSheet.create({
 });
 
 
-const ListingsQuery = gql`
-  query {
-    multipleListings{
-      title,
-      description
-    }
-  }
-`
+// const ListingsQuery = gql`
+//   query {
+//     multipleListings{
+//       title,
+//       description
+//     }
+//   }
+// `
 
-const ExploreContainerTab = graphql(ListingsQuery)(ExploreContainer);
-
+// const ExploreContainerTab = graphql(ListingsQuery)(ExploreContainer);
+const ExploreContainerTab = ExploreContainer;
 export default ExploreContainerTab;

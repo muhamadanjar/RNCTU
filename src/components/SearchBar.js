@@ -5,7 +5,7 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
-import colors from '../utils/colors';
+import colors from '../utils/Colors';
 
 export default class SearchBar extends Component {
   render() {
