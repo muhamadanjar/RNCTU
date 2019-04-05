@@ -1,5 +1,5 @@
 {
-  "name": "TransUtamaApp",
+  "name": "TransUtamaRental",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -16,13 +16,13 @@
     "native-base": "^2.12.0",
     "prop-types": "^15.7.2",
     "react": "16.6.3",
+    "react-native": "^0.58.6",
+    "react-native-maps": "^0.23.0",
     "react-addons-update": "^15.6.2",
-    "react-native": "^0.59.2",
     "react-native-elements": "^1.1.0",
     "react-native-gesture-handler": "^1.0.16",
     "react-native-google-places": "^2.5.2",
     "react-native-linear-gradient": "^2.5.3",
-    "react-native-maps": "^0.23.0",
     "react-native-swiper": "^1.5.14",
     "react-native-touchable-scale": "^2.0.0",
     "react-native-vector-icons": "^6.3.0",
