@@ -11,12 +11,12 @@ import ForgotPassword from '../screens/ForgotPassword'
 import LoggedInTabNavigator from './LoggedInTabNavigator'
 
 export default createAppContainer(createSwitchNavigator({
-    Order:Order,
+
     Main: LoggedOut,
     Auth: LogIn,
     TurnOnNotifications:TurnOnNotifications,
     ForgotPassword:ForgotPassword,
-
+    Order:Order,
     LoggedIn: {
       screen: LoggedInTabNavigator,
       navigationOptions: {

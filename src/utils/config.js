@@ -1,0 +1,5 @@
+export const BASE_URL = 'http://localhost'
+export const API_VERSION = 'api'
+export const MOBIL = 'mobil'
+export const BOOKING = 'booking'
+export const USER_PROFILE = 'users/profile'

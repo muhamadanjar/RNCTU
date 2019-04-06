@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Platform} from 'react-native'
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -59,35 +60,35 @@ const LoggedInTabNavigator = createBottomTabNavigator({
     screen: ExploreTab,
     navigationOptions: {
       tabBarLabel: 'EXPLORE',
-      tabBarIcon: CustomTabBarIcon('ios-search', 22),
+      tabBarIcon: CustomTabBarIcon(Platform.OS ==='ios' ? 'ios-search':'md-search', 22),
     },
   },
   Saved: {
     screen: SavedContainer,
     navigationOptions: {
       tabBarLabel: 'SAVED',
-      tabBarIcon: CustomTabBarIcon('ios-heart-outline', 22),
+      tabBarIcon: CustomTabBarIcon(Platform.OS ==='ios' ? 'ios-heart-outline':'md-heart', 22),
     },
   },
   Trips: {
     screen: TripsContainer,
     navigationOptions: {
       tabBarLabel: 'TRIPS',
-      tabBarIcon: CustomTabBarIcon('ios-ionic', 21),
+      tabBarIcon: CustomTabBarIcon(Platform.OS ==='ios' ? 'ios-car':'md-car', 21),
     },
   },
   Inbox: {
     screen: InboxContainer,
     navigationOptions: {
       tabBarLabel: 'INBOX',
-      tabBarIcon: CustomTabBarIcon('ios-archive-outline', 25),
+      tabBarIcon: CustomTabBarIcon(Platform.OS ==='ios' ? 'ios-archive-outline':'md-archive', 25),
     },
   },
   Profile: {
     screen: ProfileContainer,
     navigationOptions: {
       tabBarLabel: 'PROFILE',
-      tabBarIcon: CustomTabBarIcon('ios-contact-outline', 22),
+      tabBarIcon: CustomTabBarIcon(Platform.OS ==='ios' ? 'ios-contact-outline':'md-contact', 22),
     },
   },
 }, {
