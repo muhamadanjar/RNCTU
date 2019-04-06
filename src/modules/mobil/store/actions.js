@@ -15,7 +15,7 @@ import {
     BOOK_CAR,
     GET_NEARBY_DRIVERS,
     GET_ADDRESS_PREDICTIONS
-    
+
   } from './action-types';
   import RNGooglePlaces from 'react-native-google-places';
   export function getCurrentLocation(){
@@ -33,16 +33,16 @@ import {
       );
     }
   }
-  
+
   //GET USER INPUT
-  
+
   export function getInputData(payload){
     return{
       type:GET_INPUT,
       payload
     }
   }
-  
+
   //toggle search result modal
   export function toggleSearchResultModal(payload){
     return{
@@ -50,12 +50,11 @@ import {
       payload
     }
   }
-  
+
   //GET ADRESSES FROM GOOGLE PLACE
-  
+
   export function getAddressPredictions(){
     return(dispatch, store)=>{
-      console.log(store());
       let userInput = store().mobil.resultTypes.pickUp ? store().mobil.inputData.pickUp : store().mobil.inputData.dropOff;
       RNGooglePlaces.getAutocompletePredictions(userInput,
         {
@@ -71,9 +70,9 @@ import {
       .catch((error)=> console.log(error.message));
     };
   }
-  
+
   //get selected address
-  
+
   export function getSelectedAddress(payload){
     const dummyNumbers ={
       baseFare:0.4,
@@ -118,26 +117,26 @@ import {
               store().mobil.distanceMatrix.rows[0].elements[0].distance.value,
               dummyNumbers.surge,
             );
-  
+
             const fare2 = calculateFareInKM(
               dummyNumbers.baseFare,
               store().mobil.distanceMatrix.rows[0].elements[0].distance.value,
             );
-            
+
             dispatch({
               type:'GET_FARE',
               payload:fare
             })
           }
-  
+
         },2000)
-  
+
       })
       .catch((error)=> console.log(error.message));
     }
   }
-  
-  
+
+
   export function getListMobil(){
     return(dispatch, store)=>{
       let userInput = store().mobil.resultTypes.pickUp ? store().mobil.inputData.pickUp : store().mobil.inputData.dropOff;
@@ -162,11 +161,11 @@ import {
           })
           .catch((error) => {
               console.log('ERROR',error)
-              
+
           })
     };
   }
-  
+
   export function bookCar(item){
     console.log(item);
     return (dispatch, store)=>{
@@ -177,7 +176,7 @@ import {
           origin: store().mobil.selectedAddress.selectedPickUp.name,
           origin_latitude: store().mobil.selectedAddress.selectedPickUp.latitude,
           origin_longitude: store().mobil.selectedAddress.selectedPickUp.longitude,
-  
+
           destination_address: store().mobil.selectedAddress.selectedDropOff.address,
           destination: store().mobil.selectedAddress.selectedDropOff.name,
           destination_latitude: store().mobil.selectedAddress.selectedDropOff.latitude,
@@ -216,24 +215,24 @@ import {
               dispatch({
           type:BOOK_CAR,
           payload:json
-        });			
+        });
         dispatch(changeStatusCar(json.mobil_id));
           })
           .catch((error) => {
               console.log('ERROR',error)
           });
-      
+
     }
   }
   //get nearby drivers
-  
+
   export function getNearByDrivers(){
     return(dispatch, store)=>{
-      
+
       request.get("http://localhost:3000/api/driverLocation")
       .query({
         latitude:-6.3252738,
-        longitude:106.0764884	
+        longitude:106.0764884
       })
       .finish((error, res)=>{
         if(res){
@@ -243,7 +242,7 @@ import {
           });
         }
         console.log(error);
-  
+
       });
     };
   }
@@ -261,7 +260,7 @@ import {
           payload:json.status
         });
       });
-  
+
     };
   }
   export function checkStatusPesanan(){
@@ -287,11 +286,11 @@ import {
           console.log('ERROR',error)
         });
       },10000);
-  
+
       if(status == 'confirmed'){
         clearInterval(interval);
       }
-      
+
     };
   }
   export function changeStatusPesanan(st){
@@ -302,7 +301,7 @@ import {
         sewa_id:store().mobil.booking.id,
         status:st,
       });
-      
+
         fetch(URL,{
           method:'POST',
           headers: {
@@ -319,7 +318,7 @@ import {
         }).catch((error) => {
           console.log('ERROR',error)
         });
-      
+
     };
   }
   export function cancelPesanan(){
@@ -343,13 +342,13 @@ import {
         dispatch({
           type:'MAIN_PAGES',
         });
-        
-        
+
+
           })
           .catch((error) => {
               console.log('ERROR',error)
           });
-      
+
     }
   }
   export function confirmPesanan(){
@@ -373,7 +372,7 @@ import {
           .then(response => response.json())
           .then(json => {
               console.log('JSON',json)
-              
+
           })
           .catch((error) => {
               console.log('ERROR',error)

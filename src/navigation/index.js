@@ -16,7 +16,7 @@ export default createAppContainer(createSwitchNavigator({
     Auth: LogIn,
     TurnOnNotifications:TurnOnNotifications,
     ForgotPassword:ForgotPassword,
-    
+
     LoggedIn: {
       screen: LoggedInTabNavigator,
       navigationOptions: {
