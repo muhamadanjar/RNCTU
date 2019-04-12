@@ -51,13 +51,13 @@ class Order extends Component{
           >
             { selectedPickUp &&
               <MapView.Marker
-                coordinate={{latitude:selectedPickUp.latitude, longitude:selectedPickUp.longitude}}
+                coordinate={{latitude:selectedPickUp.location.latitude, longitude:selectedPickUp.location.longitude}}
                 pinColor="green"
               />
             }
             { selectedDropOff &&
               <MapView.Marker
-                coordinate={{latitude:selectedDropOff.latitude, longitude:selectedDropOff.longitude}}
+                coordinate={{latitude:selectedDropOff.location.latitude, longitude:selectedDropOff.location.longitude}}
                 pinColor="blue"
               />
             }

@@ -4,7 +4,9 @@ import {
   Text,
   ScrollView,
   StyleSheet,
+  Image
 } from 'react-native';
+import Swiper from 'react-native-swiper'
 // import { graphql } from 'react-apollo';
 // import gql from 'graphql-tag';
 import SearchBar from '../components/SearchBar';
@@ -78,12 +80,33 @@ class ExploreContainer extends Component {
     return (
       <View style={styles.wrapper}>
         <SearchBar />
+        <Swiper
+            autoplay={true}
+            style={{ height: 100 }}
+        >
+            <View style={{ flex: 1 }}>
+                <Image
+                    style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }}
+                    source={require('../assets/swiper/swiper_2.jpg')} />
+            </View>
+            <View style={{ flex: 1 }}>
+                <Image
+                    style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }}
+                    source={require('../assets/swiper/swiper_3.jpg')} />
+            </View>
+            <View style={{ flex: 1 }}>
+                <Image
+                    style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }}
+                    source={require('../assets/swiper/swiper_2.jpg')} />
+            </View>
+
+        </Swiper>
         <ScrollView
           style={styles.scrollview}
           contentContainerStyle={styles.scrollViewContent}
         >
           <Text style={styles.heading}>
-Selamat Datang di Trans Utama
+            Selamat Datang di Utama Trans
           </Text>
           <View style={styles.categories}>
             <Categories categories={categoriesList} handleOnPress={()=>navigate('Order')} />

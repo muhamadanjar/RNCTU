@@ -11,7 +11,7 @@ import ForgotPassword from '../screens/ForgotPassword'
 import LoggedInTabNavigator from './LoggedInTabNavigator'
 
 export default createAppContainer(createSwitchNavigator({
-
+    
     Main: LoggedOut,
     Auth: LogIn,
     TurnOnNotifications:TurnOnNotifications,

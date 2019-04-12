@@ -7,6 +7,7 @@ import {
     TOGGLE_SEARCH_RESULT,
     GET_ADDRESS_PREDICTIONS,
     GET_SELECTED_ADDRESS,
+    CLEAR_SELECTED_ADDRESS,
     GET_DISTANCE_MATRIX,
     GET_FARE,
     GET_MOBIL_AVAILABLE,
@@ -24,6 +25,7 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = ASPECT_RATIO * LATITUDE_DELTA
 
 const reducer = (state = initialState, { type, payload = null }) => {
+    const selectedTitle = state.resultTypes.pickUp ? "selectedPickUp" : "selectedDropOff"
     switch(type) {
       case GET_INPUT:
       const { key, value } = payload;
@@ -34,6 +36,7 @@ const reducer = (state = initialState, { type, payload = null }) => {
           }
         }
       });
+
     case GET_CURRENT_LOCATION:
       return update(state, {
         region:{
@@ -65,7 +68,7 @@ const reducer = (state = initialState, { type, payload = null }) => {
           predictions:{
             $set:{}
           }
-    
+
         });
       }
       if(payload === "dropOff"){
@@ -81,7 +84,7 @@ const reducer = (state = initialState, { type, payload = null }) => {
           predictions:{
             $set:{}
           }
-    
+
         });
       }
     case GET_ADDRESS_PREDICTIONS:
@@ -91,12 +94,12 @@ const reducer = (state = initialState, { type, payload = null }) => {
         }
       })
     case GET_SELECTED_ADDRESS:
-      let selectedTitle = state.resultTypes.pickUp ? "selectedPickUp" : "selectedDropOff"
+
       return update(state, {
         selectedAddress:{
           [selectedTitle]:{
             $set:payload
-          }		
+          }
         },
         resultTypes:{
           pickUp:{
@@ -107,6 +110,25 @@ const reducer = (state = initialState, { type, payload = null }) => {
           }
         }
       })
+      break;
+    case CLEAR_SELECTED_ADDRESS:
+  
+      return update(state, {
+        selectedAddress:{
+          [selectedTitle]:{
+            $set:{}
+          }
+        },
+        resultTypes:{
+          pickUp:{
+            $set:false
+          },
+          dropOff:{
+            $set:false
+          }
+        }
+      })
+      break;
     case GET_DISTANCE_MATRIX:
       return update(state, {
         distanceMatrix:{
