@@ -4,8 +4,12 @@ import {
   Text,
   ScrollView,
   StyleSheet,
-  Image
+  Platform,
+  Image,
+  StatusBar
 } from 'react-native';
+import HeaderComponent from '../components/HeaderComponent'
+import FAIcon from 'react-native-vector-icons/FontAwesome'
 import Swiper from 'react-native-swiper'
 // import { graphql } from 'react-apollo';
 // import gql from 'graphql-tag';
@@ -15,6 +19,7 @@ import Listings from '../components/explore/Listings';
 import colors from '../utils/Colors';
 import categoriesList from '../data/categories';
 import listings from '../data/listings';
+import CircleButton from '../components/buttons/CircleButton';
 
 class ExploreContainer extends Component {
   constructor(props) {
@@ -77,6 +82,8 @@ class ExploreContainer extends Component {
     return (
       <View style={styles.wrapper}>
         {/* <SearchBar /> */}
+        
+        <HeaderComponent></HeaderComponent>
         <ScrollView
           style={styles.scrollview}
           contentContainerStyle={styles.scrollViewContent}
@@ -103,8 +110,12 @@ class ExploreContainer extends Component {
           <Text style={styles.heading}>
             Selamat Datang di Utama Trans
           </Text>
+          <View style={styles.products}>
+            <CircleButton text={'Rental'} handleOnPress={()=>navigate('Rental')} imageSource={require('../assets/img/rental.png')}/>
+            <CircleButton text={'Taxi'} handleOnPress={()=>navigate('Order')} imageSource={require('../assets/img/taxi.png')}/>
+          </View>
           <View style={styles.categories}>
-            <Categories categories={categoriesList} handleOnPress={()=>navigate('Order')} />
+            {/* <Categories categories={categoriesList} handleOnPress={()=>navigate('Order')} /> */}
           </View>
           {this.renderListings()}
         </ScrollView>
@@ -127,13 +138,27 @@ const styles = StyleSheet.create({
   categories: {
     marginBottom: 40,
   },
+  products:{
+    alignItems:'center',
+    flexDirection:'row',
+    marginLeft:20,
+    marginRight:20
+  },
   heading: {
     fontSize: 22,
     fontWeight: '600',
+    marginTop:10,
     paddingLeft: 20,
-    paddingBottom: 20,
+    paddingBottom: 10,
     color: colors.gray04,
   },
+  androidHeader: {
+    ...Platform.select({
+        android: {
+            paddingTop: StatusBar.currentHeight,
+        }
+    })
+  }
 });
 
 

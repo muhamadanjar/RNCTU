@@ -4,7 +4,9 @@ import MainTabNavigator from './MainTab';
 import AuthScreen from '../pages/Login'
 import SwiperComponent from '../screens/Swiper'
 import AmazonHome from '../screens/AmazonHome'
+import SignUp from '../screens/SignUp'
 import Order from '../screens/Order'
+import Rental from '../screens/Rental'
 import LoggedOut from '../screens/LoggedOut'
 import LogIn from '../screens/LogIn'
 import TurnOnNotifications from '../screens/TurnOnNotifications'
@@ -14,6 +16,7 @@ import LoggedInTabNavigator from './LoggedInTabNavigator'
 export default createAppContainer(createSwitchNavigator({
   // AmazonHome:AmazonHome,
   // Swiper:SwiperComponent,
+  Main: LoggedOut,
   LoggedIn: {
     screen: LoggedInTabNavigator,
     navigationOptions: {
@@ -21,10 +24,12 @@ export default createAppContainer(createSwitchNavigator({
       gesturesEnabled: false,
     },
   },  
-  Main: LoggedOut,
+  
   Auth: LogIn,
+  SignUp: SignUp,
   TurnOnNotifications:TurnOnNotifications,
   ForgotPassword:ForgotPassword,
   Order:Order,
+  Rental:Rental,
     
 }));

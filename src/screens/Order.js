@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View,Text,ToastAndroid } from 'react-native'
+import HeaderComponent from '../components/HeaderComponent'
 import FormSearchBox from '../components/mobil/searchbox'
 import FormSearchResults from '../components/mobil/searchresult'
 import colors from '../utils/Colors'
@@ -18,7 +19,7 @@ const navigateToTabsAction = NavigationActions.navigate({
 
 class Order extends Component{
     static navigationOptions = () => ({
-      headerLeft: null,
+      // headerLeft: null,
       headerStyle: transparentHeaderStyle,
       headerTransparent: true,
       gesturesEnabled: false,
@@ -42,7 +43,7 @@ class Order extends Component{
       }
       return (
         <View style={styles.wrapper}>
-
+          
           <MapView
               provider={MapView.PROVIDER_GOOGLE}
               style={styles.map}

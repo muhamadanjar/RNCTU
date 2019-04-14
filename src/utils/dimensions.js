@@ -10,4 +10,6 @@ const iPhoneSize = () => {
   return 'medium'; // iPhone 6/7
 };
 
+
+
 export default iPhoneSize;

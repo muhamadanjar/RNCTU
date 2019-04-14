@@ -1,15 +1,21 @@
 import React from "react";
-import {Text} from "react-native";
+import {Text,FlatList} from "react-native";
 import { View, List, ListItem, Left, Body } from "native-base";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import styles from "./searchresult.styles.js";
 
-export const FormSearchResults = ({predictions, getSelectedAddress})=> {
+export const FormSearchResults = ({predictions, getSelectedAddress,searchBarFocused})=> {
 	function handleSelectedAddress(placeID){
 		getSelectedAddress(placeID)
 	}
+	state = {
+		searchBarFocused: false
+	}
+		if (predictions !== null || predictions !== undefined) {
+			
+		
 		return(
 			<View style={styles.searchResultsWrapper} >
 				<List
@@ -28,9 +34,21 @@ export const FormSearchResults = ({predictions, getSelectedAddress})=> {
 						</View>
 					}
 				/>
+				<FlatList
+					style={{ backgroundColor: this.state.searchBarFocused ? 'rgba(0,0,0,0.3)' : 'white' }}
+					data={predictions}
+					renderItem={({ item }) => 
+						<View>
+							<Text style={{ padding: 20, fontSize: 20 }}>{item.primaryText}</Text>
+						</View>
+					}
+					
+				/>
 			</View>
 
-		);
+		);}else{
+			return null
+		}
 };
 
 export default FormSearchResults;

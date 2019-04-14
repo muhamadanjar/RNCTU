@@ -13,7 +13,7 @@ import RoundedButton from '../components/buttons/RoundedButton';
 import NavBarButton from '../components/buttons/NavBarButton';
 import styles from './styles/LoggedOut';
 
-const airbnbLogo = require('../assets/img/airbnb-logo.png');
+const airbnbLogo = require('../assets/img/taxi.png');
 
 export default class LoggedOut extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -29,7 +29,7 @@ export default class LoggedOut extends Component {
 
   onCreateAccountPress() {
     console.log('Create Account button pressed');
-    console.log(this.props);
+    this.props.navigation.navigate('SignUp')
   }
 
   onMoreOptionsPress() {
@@ -46,7 +46,7 @@ export default class LoggedOut extends Component {
             style={styles.logo}
           />
           <Text style={styles.welcomeText}>
-Welcome to Trans Utama.
+Welcome to Utama Trans.
           </Text>
           <RoundedButton
             text="Continue with Facebook"

@@ -14,19 +14,20 @@ export default class NoResults extends Component {
     <View>
       <ScrollView style={styles.scrollView}>
         <Text style={styles.heading}>
-Saved
+Daftar Booking
         </Text>
         <Text style={styles.description}>
-Not every day is filled with adventures, but you can start planning for the next one.
+        Anda belum membuat pesanan. Mulailah sekarang
+
         </Text>
         <Text style={styles.description}>
-Tap the heart on any home to start saving your favorites here.
+
         </Text>
       </ScrollView>
       <View style={styles.footer}>
         <TouchableHighlight style={styles.findHomesButton}>
           <Text style={styles.findHomesButtonText}>
-Find homes
+Buat Pesanan
           </Text>
         </TouchableHighlight>
       </View>

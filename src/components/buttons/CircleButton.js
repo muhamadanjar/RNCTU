@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View,Text,TouchableHighlight,StyleSheet } from 'react-native'
+import { View,Text,TouchableHighlight,StyleSheet,Image } from 'react-native'
 import colors from '../../utils/Colors';
-export class CircleButton extends Component{
+import PropTypes from 'prop-types'
+export default class CircleButton extends Component{
     render(){
         const {
             loading,
@@ -16,6 +17,7 @@ export class CircleButton extends Component{
             iconPosition,
             textAlign,
             borderColor,
+            imageSource
           } = this.props;
         const backgroundColor = background || 'transparent';
         const color = textColor || colors.black;
@@ -28,14 +30,10 @@ export class CircleButton extends Component{
         const textOpacity = loading ? 0 : 1;
         const rippleColor = backgroundColor === 'transparent' ? color : 'rgba(0,0,0,0.4)';
         return (<View style={styles.container}>
-            <Text style={{ fontSize:22 }}>Only image clickable</Text>
-            <TouchableHighlight style={ styles.imageContainer }>
-                    <Image style={ styles.image } source={{ uri: 'http://www.free-avatars.com/data/media/37/cat_avatar_0597.jpg' }} />
+            <TouchableHighlight style={ styles.imageContainer } onPress={handleOnPress}>
+                <Image style={ styles.image } source={imageSource} />
             </TouchableHighlight> 
-            <Text style={{ fontSize:22 }}>Entire Row Clickable</Text>
-            <TouchableHighlight style={ styles.imageContainer2 }>
-                    <Image style={ styles.image } source={{ uri: 'http://www.free-avatars.com/data/media/37/cat_avatar_0597.jpg' }} />
-            </TouchableHighlight> 
+            <Text style={styles.text}>{text}</Text>
         </View>)
     }
 }
@@ -58,17 +56,26 @@ CircleButton.propTypes = {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      marginTop:60
+      marginTop:5,
+      alignItems:'center',
+      marginBottom:10
     },
     imageContainer: {
       height:128,
       width: 128,
-      borderRadius: 64
+      borderRadius: 64,
+      alignItems:'center',
+      justifyContent: 'center',
+      backgroundColor:'#FFF'
     },
     image: {
-      height:128,
-      width: 128,
-      borderRadius: 64
+      height:80,
+      width: 80,
+      borderRadius: 14,
+    },
+    text:{
+      fontWeight:'bold',
+      fontSize:12
     },
     imageContainer2: {
   
