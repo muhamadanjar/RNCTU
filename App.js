@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View,NetInfo} from 'react-native';
 import Navigation from './src/navigation'
+import OfflineComponent from './src/components/OfflineComponent'
 import {Provider} from 'react-redux'
 import store from './src/store'
 import {
@@ -12,20 +13,12 @@ export default class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      accessToken:null
+      accessToken:null,
+      offlineMode:true
     }
   }
-  componentDidMount() {
-    // AccessToken.getCurrentAccessToken()
-    // .then((data) => {
-    //   this.setState({
-    //     accessToken: data.accessToken
-    //   })
-    // })
-    // .catch(error => {
-    //   console.log(error)
-    // })
-  }
+  componentDidMount() {}
+  componentWillUnmount() {}
   render() {
     return this.InitApp()
   }
@@ -33,10 +26,20 @@ export default class App extends Component {
     const AppStore = store(window.___INTITIAL_STATE__);
     return (
       <Provider store={AppStore}>
+        <OfflineComponent/>
         <Navigation/>
       </Provider>
     )
   }
+  checkApp(){
+    const {offlineMode} = this.state;
+    if(offlineMode){
+      return <OfflineComponent/>
+    }else{
+      return <Navigation/>
+    }
+  }
+  
 }
 
 const styles = StyleSheet.create({

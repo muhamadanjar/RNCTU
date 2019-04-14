@@ -12,18 +12,18 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 var { height, width } = Dimensions.get('window');
 import CardComponent from '../components/CardComponent'
 var images = [
-  require('../../assets/feed_images/1.jpg'),
-  require('../../assets/feed_images/2.jpg'),
-  require('../../assets/feed_images/3.png'),
-  require('../../assets/feed_images/4.jpg'),
-  require('../../assets/feed_images/5.jpg'),
-  require('../../assets/feed_images/6.jpg'),
-  require('../../assets/feed_images/7.jpg'),
-  require('../../assets/feed_images/8.png'),
-  require('../../assets/feed_images/9.jpg'),
-  require('../../assets/feed_images/10.jpg'),
-  require('../../assets/feed_images/11.jpg'),
-  require('../../assets/feed_images/12.jpg'),
+  require('../assets/feed_images/1.jpg'),
+  require('../assets/feed_images/2.jpg'),
+  require('../assets/feed_images/3.png'),
+  require('../assets/feed_images/4.jpg'),
+  require('../assets/feed_images/5.jpg'),
+  require('../assets/feed_images/6.jpg'),
+  require('../assets/feed_images/7.jpg'),
+  require('../assets/feed_images/8.png'),
+  require('../assets/feed_images/9.jpg'),
+  require('../assets/feed_images/10.jpg'),
+  require('../assets/feed_images/11.jpg'),
+  require('../assets/feed_images/12.jpg'),
 ]
 export default class ProfileContainer extends Component {
   constructor(props){

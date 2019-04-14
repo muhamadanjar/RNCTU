@@ -26,11 +26,9 @@ class ExploreContainer extends Component {
     this.renderListings = this.renderListings.bind(this);
     this.onCreateListClose = this.onCreateListClose.bind(this);
   }
-
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
   }
-
   handleAddToFav(listing) {
     const { navigate } = this.props.navigation;
     let { favouriteListings } = this.state;
@@ -74,19 +72,21 @@ class ExploreContainer extends Component {
 
   render() {
     const { data,navigation } = this.props;
-    const { navigate} = navigation;
+    const { navigate } = navigation;
     console.log(data)
-
     return (
       <View style={styles.wrapper}>
-        <SearchBar />
+        {/* <SearchBar /> */}
+        <ScrollView
+          style={styles.scrollview}
+          contentContainerStyle={styles.scrollViewContent}
+        >
         <Swiper
             autoplay={true}
-            style={{ height: 100 }}
-        >
+            style={{ height: 200,backgroundColor:'#000' }}>
             <View style={{ flex: 1 }}>
                 <Image
-                    style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }}
+                    style={{ flex: 1, height: 200, width: null, resizeMode: 'contain' }}
                     source={require('../assets/swiper/swiper_2.jpg')} />
             </View>
             <View style={{ flex: 1 }}>
@@ -99,12 +99,7 @@ class ExploreContainer extends Component {
                     style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }}
                     source={require('../assets/swiper/swiper_2.jpg')} />
             </View>
-
         </Swiper>
-        <ScrollView
-          style={styles.scrollview}
-          contentContainerStyle={styles.scrollViewContent}
-        >
           <Text style={styles.heading}>
             Selamat Datang di Utama Trans
           </Text>
@@ -124,7 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   scrollview: {
-    paddingTop: 100,
+    // paddingTop: 100,
   },
   scrollViewContent: {
     paddingBottom: 80,
