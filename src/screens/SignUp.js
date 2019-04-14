@@ -4,6 +4,7 @@ import { Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet } 
 import { Button, Block, Input, Text } from '../components';
 import sizes from '../utils/size'
 import colors from '../utils/Colors'
+import HeaderComponent from '../components/HeaderComponent'
 export default class SignUp extends Component {
   state = {
     email: null,
@@ -51,6 +52,7 @@ export default class SignUp extends Component {
 
     return (
       <KeyboardAvoidingView style={styles.signup} behavior="padding">
+        <HeaderComponent/>
         <Block padding={[0, sizes.base * 2]}>
           <Text h1 bold>Sign Up</Text>
           <Block middle>
@@ -84,7 +86,7 @@ export default class SignUp extends Component {
               }
             </Button>
 
-            <Button onPress={() => navigation.navigate('Login')}>
+            <Button onPress={() => navigation.navigate('Auth')}>
               <Text gray caption center style={{ textDecorationLine: 'underline' }}>
                 Back to Login
               </Text>

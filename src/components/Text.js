@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   tertiary: { color: colors.tertiary },
   black: { color: colors.black },
   white: { color: colors.white },
-  gray: { color: colors.gray },
+  gray: { color: colors.gray01 },
   gray2: { color: colors.gray02 },
   // fonts
   h1: fonts.h1,

@@ -31,4 +31,7 @@ export default {
   brown01: '#ad8763',
   brown02: '#7d4918',
   blue: '#4995cd',
+  tertiary: '#FFE358',
+  primary: "#0AC4BA",
+  secondary: "#2BDA8E",
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, TextInput } from 'react-native'
-import {Ionicons} from 'react-native-vector-icons'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import Text from './Text';
 import Block from './Block';
@@ -89,6 +89,7 @@ export default class Input extends Component {
 
     return (
       <Block flex={false} margin={[sizes.base, 0]}>
+        
         {this.renderLabel()}
         <TextInput
           style={inputStyles}

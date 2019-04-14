@@ -204,6 +204,6 @@ export const styles = StyleSheet.create({
   tertiary: { backgroundColor: colors.tertiary, },
   black: { backgroundColor: colors.black, },
   white: { backgroundColor: colors.white, },
-  gray: { backgroundColor: colors.gray, },
+  gray: { backgroundColor: colors.gray01, },
   gray2: { backgroundColor: colors.gray02, },
 })

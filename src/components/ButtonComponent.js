@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import sizes from '../utils/size'
 import colors from '../utils/Colors'
 
-class Button extends Component {
+export default class Button extends Component {
   render() {
     const {
       style,
@@ -64,14 +64,13 @@ class Button extends Component {
 Button.defaultProps = {
   startColor: colors.primary,
   endColor: colors.secondary,
-  start: { x: 0, y: 0 },
-  end: { x: 1, y: 1 },
+  start: { x: 0.0, y: 0.0 },
+  end: { x: 1.0, y: 0.0 },
   locations: [0.1, 0.9],
   opacity: 0.8,
   color: colors.white,
 }
 
-export default Button;
 
 const styles = StyleSheet.create({
   button: {
@@ -92,8 +91,8 @@ const styles = StyleSheet.create({
   tertiary: { backgroundColor: colors.tertiary, },
   black: { backgroundColor: colors.black, },
   white: { backgroundColor: colors.white, },
-  gray: { backgroundColor: colors.gray, },
-  gray2: { backgroundColor: colors.gray2, },
-  gray3: { backgroundColor: colors.gray3, },
-  gray4: { backgroundColor: colors.gray4, },
+  gray: { backgroundColor: colors.gray01, },
+  gray2: { backgroundColor: colors.gray02, },
+  gray3: { backgroundColor: colors.gray03, },
+  gray4: { backgroundColor: colors.gray04, },
 });
