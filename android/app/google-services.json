@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1019637452944",
+    "firebase_url": "https://rmapp-1516262005209.firebaseio.com",
+    "project_id": "rmapp-1516262005209",
+    "storage_bucket": "rmapp-1516262005209.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019637452944:android:eaac3bc2dcdcf54c",
+        "android_client_info": {
+          "package_name": "com.transutama.rental"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019637452944-dsc0jppc324r22lqt0ebac9ccqik13gm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.transutama.rental",
+            "certificate_hash": "079a8f8117373c003d958d4e8968bfeb5623d5f1"
+          }
+        },
+        {
+          "client_id": "1019637452944-rtor33do97fgl35rn20h5st32tl9a124.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPEm7OsqEFum7nbxpTfdm4BGQ6hwC2iqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019637452944-rtor33do97fgl35rn20h5st32tl9a124.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

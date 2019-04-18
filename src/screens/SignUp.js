@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import { Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet } from 'react-native';
-
+import Http from '../utils/Http'
+import {BASE_URL,REGISTER, API_VERSION} from '../utils/config'
 import { Button, Block, Input, Text } from '../components';
 import sizes from '../utils/size'
 import colors from '../utils/Colors'
 import HeaderComponent from '../components/HeaderComponent'
+import { View } from 'native-base';
+import RoundedButton from '../components/buttons/RoundedButton';
 export default class SignUp extends Component {
   state = {
     email: null,
     username: null,
     password: null,
+    no_telepon:null,
     errors: [],
     loading: false,
   }
@@ -30,6 +34,7 @@ export default class SignUp extends Component {
     this.setState({ errors, loading: false });
 
     if (!errors.length) {
+      Http.post(`${BASE_URL}/${API_VERSION}/${REGISTER}`)
       Alert.alert(
         'Success!',
         'Your account has been created',
@@ -53,6 +58,14 @@ export default class SignUp extends Component {
     return (
       <KeyboardAvoidingView style={styles.signup} behavior="padding">
         <HeaderComponent/>
+        <View style={{flexDirection:'column'}}>
+          <RoundedButton>
+            Facebook
+          </RoundedButton>
+          <RoundedButton>
+            Google
+          </RoundedButton>
+        </View>
         <Block padding={[0, sizes.base * 2]}>
           <Text h1 bold>Sign Up</Text>
           <Block middle>
@@ -70,6 +83,13 @@ export default class SignUp extends Component {
               style={[styles.input, hasErrors('username')]}
               defaultValue={this.state.username}
               onChangeText={text => this.setState({ username: text })}
+            />
+            <Input
+              label="No Telepon"
+              error={hasErrors('no_telepon')}
+              style={[styles.input, hasErrors('no_telepon')]}
+              defaultValue={this.state.no_telepon}
+              onChangeText={text => this.setState({ no_telepon: text })}
             />
             <Input
               secure
