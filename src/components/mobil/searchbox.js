@@ -1,5 +1,5 @@
 import React from "react";
-import {Text} from "react-native";
+import {Text,KeyboardAvoidingView} from "react-native";
 import { View, InputGroup, Input } from "native-base";
 import styles from "./searchbox.styles.js";
 
@@ -14,9 +14,11 @@ export const FormSearchBox = ({getInputData, toggleSearchResultModal, getAddress
 	}
 
 		return(
+			
 			<View style={styles.searchBox}>
 				<View style={styles.inputWrapper}>
 					<Text style={styles.label}>PICK UP</Text>
+					<KeyboardAvoidingView>
 					<InputGroup>
 						<Input
 							onFocus={()=>toggleSearchResultModal("pickUp")}
@@ -26,9 +28,11 @@ export const FormSearchBox = ({getInputData, toggleSearchResultModal, getAddress
 							value={selectedPickUp && selectedPickUp.name}
 						/>
 					</InputGroup>
+					</KeyboardAvoidingView>
 				</View>
 				<View style={styles.secondInputWrapper}>
 					<Text style={styles.label}>DROP-OFF</Text>
+					<KeyboardAvoidingView>
 					<InputGroup>
 
 						<Input
@@ -39,6 +43,7 @@ export const FormSearchBox = ({getInputData, toggleSearchResultModal, getAddress
 							value={selectedDropOff && selectedDropOff.name}
 						/>
 					</InputGroup>
+					</KeyboardAvoidingView>
 				</View>
 			</View>
 

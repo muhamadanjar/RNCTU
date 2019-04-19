@@ -4,6 +4,7 @@ import { View,Text,ToastAndroid } from 'react-native'
 import HeaderComponent from '../components/HeaderComponent'
 import FormSearchBox from '../components/mobil/searchbox'
 import FormSearchResults from '../components/mobil/searchresult'
+import Fare from '../components/mobil/fare'
 import colors from '../utils/Colors'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -32,7 +33,6 @@ class Order extends Component{
   		this.props.getCurrentLocation();
   	}
     render(){
-      console.log(this.props);
       const { navigation,selectedAddress,getInputData,toggleSearchResultModal,getAddressPredictions,resultTypes,predictions,getSelectedAddress } = this.props;
       const { selectedPickUp, selectedDropOff } = selectedAddress || {};
       const region = {
@@ -43,7 +43,6 @@ class Order extends Component{
       }
       return (
         <View style={styles.wrapper}>
-          
           <MapView
               provider={MapView.PROVIDER_GOOGLE}
               style={styles.map}
@@ -53,7 +52,7 @@ class Order extends Component{
             { selectedPickUp &&
               <MapView.Marker
                 coordinate={{latitude:selectedPickUp.location.latitude, longitude:selectedPickUp.location.longitude}}
-                pinColor="green"
+                pinCol  or="green"
               />
             }
             { selectedDropOff &&
@@ -63,6 +62,7 @@ class Order extends Component{
               />
             }
           </MapView>
+          
           <FormSearchBox
     				getInputData={getInputData}
     				toggleSearchResultModal={toggleSearchResultModal}
@@ -71,6 +71,9 @@ class Order extends Component{
     			/>
           { (resultTypes.pickUp || resultTypes.dropOff) &&
             <FormSearchResults predictions={predictions} getSelectedAddress={getSelectedAddress}/>
+          }
+          {
+							this.props.fare &&  <Fare fare={this.props.fare} />
           }
         </View>
       )

@@ -7,6 +7,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as ActionCreators from '../modules/auth/store/actions';
@@ -24,7 +25,7 @@ class LogIn extends Component {
     headerRight: <NavBarButton
       handleButtonPress={() => navigation.navigate('ForgotPassword')}
       location="right"
-      color={colors.white}
+      color={colors.blue}
       text="Forgot Password"
     />,
     headerLeft: <NavBarButton
@@ -57,17 +58,15 @@ class LogIn extends Component {
 
   handleNextButton() {
     this.setState({ loadingVisible: true });
-    const { logIn, navigation } = this.props;
+    const { logIn,authLogin, navigation } = this.props;
     const { navigate } = navigation;
 
     setTimeout(() => {
       const { emailAddress, password } = this.state;
-      if (logIn(emailAddress, password)) {
-        this.setState({ formValid: true, loadingVisible: false });
-        navigate('TurnOnNotifications');
-      } else {
-        this.setState({ formValid: false, loadingVisible: false });
-      }
+      let payload = {username:emailAddress,password:password};
+      if(authLogin(payload)){
+        this.setState({ formValid: true, loadingVisible: false });navigate('TurnOnNotifications');
+      }else{this.setState({ formValid: false, loadingVisible: false });}
     }, 2000);
   }
 
@@ -107,7 +106,7 @@ class LogIn extends Component {
 
   toggleNextButtonState() {
     const { validEmail, validPassword } = this.state;
-    if (validEmail && validPassword) {
+    if (validPassword) {
       return false;
     }
     return true;
@@ -118,7 +117,7 @@ class LogIn extends Component {
       formValid, loadingVisible, validEmail, validPassword,
     } = this.state;
     const showNotification = !formValid;
-    const background = formValid ? colors.green01 : colors.darkOrange;
+    const background = formValid ? colors.blue : colors.darkOrange;
     const notificationMarginTop = showNotification ? 10 : 0;
     return (
       <KeyboardAvoidingView
@@ -128,7 +127,7 @@ class LogIn extends Component {
         <View style={styles.scrollViewWrapper}>
           <ScrollView style={styles.scrollView}>
             <Text style={styles.loginHeader}>
-Log In
+              Log In
             </Text>
             <InputField
               labelText="EMAIL ADDRESS"
@@ -159,6 +158,7 @@ Log In
             disabled={this.toggleNextButtonState()}
           />
         </View>
+
         <Loader
           modalVisible={loadingVisible}
           animationType="fade"

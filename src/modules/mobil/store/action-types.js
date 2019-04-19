@@ -18,7 +18,7 @@ export const GET_SELECTED_CAR = 'GET_SELECTED_CAR'
 export const BOOK_CAR = 'BOOK_CAR'
 export const BOOKING_CANCELED = 'BOOKING_CANCELED'
 export const BOOKING_CONFIRMED = 'BOOKING_CONFIRMED'
-
+export const GET_FARE = 'GET_FARE'
 
 
 export default {
@@ -41,5 +41,6 @@ export default {
   GET_SELECTED_CAR,
   BOOK_CAR,
   BOOKING_CANCELED,
-  BOOKING_CONFIRMED
+  BOOKING_CONFIRMED,
+  GET_FARE
 }

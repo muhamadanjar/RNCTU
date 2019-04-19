@@ -1,10 +1,20 @@
 import React from 'react'
-import { View,Text } from 'react-native'
+import { View,Text,Dimensions,StyleSheet } from 'react-native'
 import colors from '../utils/Colors'
+const {width} = Dimensions.get('window')
 const HeaderComponent =({text}) =>{
-    return (<View style={{justifyContent:'center',alignItems:'center',height:50,backgroundColor: colors.blue,borderBottomColor: '#757575'}}>
-        <Text style={{fontSize:23,fontWeight:'600',color:'#FFF'}}>Utama Trans</Text>
+    return (<View style={styles.wrapper}>
+        <Text style={styles.text}>Utama Trans</Text>
     </View>)
 }
+
+const styles = StyleSheet.create({
+    wrapper:{
+        width:width,position:'absolute',justifyContent:'center',alignItems:'center',height:50,backgroundColor: colors.blue,borderBottomColor: '#757575',height:50
+    },
+    text:{
+        fontSize:23,fontWeight:'600',color:'#FFF'
+    }
+});
 
 export default HeaderComponent

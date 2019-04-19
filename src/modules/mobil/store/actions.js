@@ -14,9 +14,11 @@ import {
     GET_SELECTED_CAR,
     BOOK_CAR,
     GET_NEARBY_DRIVERS,
-    GET_ADDRESS_PREDICTIONS
-
+    GET_ADDRESS_PREDICTIONS,
+    GET_FARE
   } from './action-types';
+  import HTTP from '../../../utils/Http'
+  import {calculateFare,calculateFareInKM} from '../../../utils/fareCalculator'
   import RNGooglePlaces from 'react-native-google-places';
   export function getCurrentLocation(){
     return(dispatch)=>{
@@ -91,23 +93,22 @@ import {
       .then(()=>{
         //Get the distance and time
         if(store().mobil.selectedAddress.selectedPickUp && store().mobil.selectedAddress.selectedDropOff){
-          request.get("https://maps.googleapis.com/maps/api/distancematrix/json")
-          .query({
+          HTTP.get("https://maps.googleapis.com/maps/api/distancematrix/json",
+          {params:{
             origins:store().mobil.selectedAddress.selectedPickUp.latitude + "," + store().mobil.selectedAddress.selectedPickUp.longitude,
             destinations:store().mobil.selectedAddress.selectedDropOff.latitude + "," + store().mobil.selectedAddress.selectedDropOff.longitude,
             mode:"driving",
             key:"AIzaSyDUYbTR-3PDWPhgxjENs4yf35g2eHc641s"
             //key:"AIzaSyD-0l6eDHRcYavjDzAzih7QhWdlEKIA7eI"
-          })
-          .finish((error, res)=>{
+          }})
+          .then((res)=>{
             dispatch({
               type:GET_DISTANCE_MATRIX,
-              payload:res.body
+              payload:res.data
             });
           })
         }
         setTimeout(function(){
-          //console.log(store().mobil);
           if(store().mobil.selectedAddress.selectedPickUp && store().mobil.selectedAddress.selectedDropOff){
             const fare = calculateFare(
               dummyNumbers.baseFare,
@@ -124,7 +125,7 @@ import {
             );
 
             dispatch({
-              type:'GET_FARE',
+              type:GET_FARE,
               payload:fare
             })
           }

@@ -13,10 +13,11 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.interceptors.response.use(
   response => response,
   (error) => {
-    if (error.response.status === 401) {
-      store.dispatch(authLogout())
+    if (error.response && error.response.status === 401) {
+      store().dispatch(authLogout())
     }
     return Promise.reject(error);
   });
+
 
 export default axios

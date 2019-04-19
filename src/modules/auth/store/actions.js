@@ -5,9 +5,9 @@ import {
     AUTH_REFRESH_TOKEN,
     AUTH_RESET_PASSWORD,
     AUTH_USER,
-    SET_LOGGED_IN_STATE
+    SET_LOGGED_IN_STATE,
+    AUTH_LOGIN_SAMPLE
   } from './action-types';
-import user from '../../../data/user.json';
 
   export function authCheck() {
     return {
@@ -23,15 +23,10 @@ import user from '../../../data/user.json';
   }
 
   export const logIn = (email, password) => {
-    const action = (dispatch) => {
-      if (email === user.email && password === user.password) {
-        dispatch(setLoggedInState(true));
-        return true;
-      }
-      dispatch(setLoggedInState(false));
-      return false;
-    };
-    return action;
+    return{
+      type: AUTH_LOGIN_SAMPLE,
+      payload:{email,password}
+    }
   };
 
   export const setLoggedInState = loggedInState => (
