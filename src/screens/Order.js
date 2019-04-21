@@ -13,11 +13,12 @@ import MapView from "react-native-maps";
 import transparentHeaderStyle from '../utils/navigation.styles'
 import { NavigationActions } from 'react-navigation';
 import styles from './styles/Order'
+import MapContainer from '../containers/MapContainer'
 const navigateToTabsAction = NavigationActions.navigate({
   routeName: 'LoggedIn',
 });
 
-
+const carMarker = require('../assets/img/carMarker.png')
 class Order extends Component{
     static navigationOptions = () => ({
       // headerLeft: null,
@@ -42,36 +43,18 @@ class Order extends Component{
         longitudeDelta:0.0421
       }
       return (
-        <View style={styles.wrapper}>
-          <MapView
-              provider={MapView.PROVIDER_GOOGLE}
-              style={styles.map}
-              region={region}
-              initialRegion={region}
-          >
-            { selectedPickUp &&
-              <MapView.Marker
-                coordinate={{latitude:selectedPickUp.location.latitude, longitude:selectedPickUp.location.longitude}}
-                pinCol  or="green"
-              />
-            }
-            { selectedDropOff &&
-              <MapView.Marker
-                coordinate={{latitude:selectedDropOff.location.latitude, longitude:selectedDropOff.location.longitude}}
-                pinColor="blue"
-              />
-            }
-          </MapView>
-          
-          <FormSearchBox
-    				getInputData={getInputData}
-    				toggleSearchResultModal={toggleSearchResultModal}
-    				getAddressPredictions={getAddressPredictions}
-    				selectedAddress={selectedAddress}
-    			/>
-          { (resultTypes.pickUp || resultTypes.dropOff) &&
-            <FormSearchResults predictions={predictions} getSelectedAddress={getSelectedAddress}/>
-          }
+        <View>
+          {/* <HeaderComponent/> */}
+          <MapContainer region={this.props.region} 
+							getInputData={getInputData}
+							toggleSearchResultModal={this.props.toggleSearchResultModal}
+							getAddressPredictions={this.props.getAddressPredictions}
+							resultTypes={this.props.resultTypes}
+							predictions={this.props.predictions}
+							getSelectedAddress={this.props.getSelectedAddress}
+							selectedAddress={selectedAddress}
+							carMarker={carMarker}
+							nearByDrivers={this.props.nearByDrivers}/>
           {
 							this.props.fare &&  <Fare fare={this.props.fare} />
           }

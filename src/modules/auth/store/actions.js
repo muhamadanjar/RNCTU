@@ -6,7 +6,8 @@ import {
     AUTH_RESET_PASSWORD,
     AUTH_USER,
     SET_LOGGED_IN_STATE,
-    AUTH_LOGIN_SAMPLE
+    AUTH_LOGIN_SAMPLE,
+    AUTH_REGISTER
   } from './action-types';
 
   export function authCheck() {
@@ -60,4 +61,11 @@ import {
       type: AUTH_USER,
       payload
     }
-}
+  }
+
+  export function authRegister(payload){
+    return {
+      type: AUTH_REGISTER,
+      payload
+    }
+  }

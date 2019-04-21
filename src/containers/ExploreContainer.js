@@ -11,6 +11,7 @@ import {
 import HeaderComponent from '../components/HeaderComponent'
 import FAIcon from 'react-native-vector-icons/FontAwesome'
 import Swiper from 'react-native-swiper'
+import Promo from '../components/mobil/promo'
 // import { graphql } from 'react-apollo';
 // import gql from 'graphql-tag';
 import SearchBar from '../components/SearchBar';
@@ -88,25 +89,7 @@ class ExploreContainer extends Component {
           style={styles.scrollview}
           contentContainerStyle={styles.scrollViewContent}
         >
-        <Swiper
-            autoplay={true}
-            style={{ height: 200,backgroundColor:'#000' }}>
-            <View style={{ flex: 1 }}>
-                <Image
-                    style={{ flex: 1, height: 200, width: null, resizeMode: 'contain' }}
-                    source={require('../assets/swiper/swiper_2.jpg')} />
-            </View>
-            <View style={{ flex: 1 }}>
-                <Image
-                    style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }}
-                    source={require('../assets/swiper/swiper_3.jpg')} />
-            </View>
-            <View style={{ flex: 1 }}>
-                <Image
-                    style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }}
-                    source={require('../assets/swiper/swiper_2.jpg')} />
-            </View>
-        </Swiper>
+          <Promo/>
           <Text style={styles.heading}>
             Selamat Datang di Utama Trans
           </Text>

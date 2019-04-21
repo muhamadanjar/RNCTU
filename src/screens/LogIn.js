@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
 import {
   View,
   Text,
@@ -152,6 +153,7 @@ class LogIn extends Component {
               onChangeText={this.handlePasswordChange}
               showCheckmark={validPassword}
             />
+
           </ScrollView>
           <NextArrowButton
             handleNextButton={this.handleNextButton}

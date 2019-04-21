@@ -16,7 +16,6 @@ import LoggedInTabNavigator from './LoggedInTabNavigator'
 export default createAppContainer(createSwitchNavigator({
   // AmazonHome:AmazonHome,
   // Swiper:SwiperComponent,
-  Order:Order,
   Main: LoggedOut,
   LoggedIn: {
     screen: LoggedInTabNavigator,
@@ -26,6 +25,7 @@ export default createAppContainer(createSwitchNavigator({
     },
   },  
   Auth: LogIn,
+  Order:Order,
   SignUp: SignUp,
   TurnOnNotifications:TurnOnNotifications,
   ForgotPassword:ForgotPassword,

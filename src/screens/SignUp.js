@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as ActionCreators from '../modules/mobil/store/actions';
 import Http from '../utils/Http'
 import {BASE_URL,REGISTER, API_VERSION} from '../utils/config'
 import { Button, Block, Input, Text } from '../components';
@@ -8,7 +11,7 @@ import colors from '../utils/Colors'
 import HeaderComponent from '../components/HeaderComponent'
 import { View } from 'native-base';
 import RoundedButton from '../components/buttons/RoundedButton';
-export default class SignUp extends Component {
+export class SignUp extends Component {
   state = {
     email: null,
     username: null,
@@ -34,7 +37,8 @@ export default class SignUp extends Component {
     this.setState({ errors, loading: false });
 
     if (!errors.length) {
-      Http.post(`${BASE_URL}/${API_VERSION}/${REGISTER}`)
+      const payload = {email:email,password:password,username:username,no_telp:no_telepon};
+      this.props.authRegister(payload)
       Alert.alert(
         'Success!',
         'Your account has been created',
@@ -58,14 +62,7 @@ export default class SignUp extends Component {
     return (
       <KeyboardAvoidingView style={styles.signup} behavior="padding">
         <HeaderComponent/>
-        <View style={{flexDirection:'column'}}>
-          <RoundedButton>
-            Facebook
-          </RoundedButton>
-          <RoundedButton>
-            Google
-          </RoundedButton>
-        </View>
+       
         <Block padding={[0, sizes.base * 2]}>
           <Text h1 bold>Sign Up</Text>
           <Block middle>
@@ -107,7 +104,7 @@ export default class SignUp extends Component {
             </Button>
 
             <Button onPress={() => navigation.navigate('Auth')}>
-              <Text gray caption center style={{ textDecorationLine: 'underline' }}>
+              <Text  caption center style={{ textDecorationLine: 'underline' }}>
                 Back to Login
               </Text>
             </Button>
@@ -117,6 +114,9 @@ export default class SignUp extends Component {
     )
   }
 }
+const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
+
+export default connect(null,mapDispatchToProps)(SignUp)
 
 const styles = StyleSheet.create({
   signup: {

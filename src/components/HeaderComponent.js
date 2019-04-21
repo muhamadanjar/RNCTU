@@ -10,7 +10,7 @@ const HeaderComponent =({text}) =>{
 
 const styles = StyleSheet.create({
     wrapper:{
-        width:width,position:'absolute',justifyContent:'center',alignItems:'center',height:50,backgroundColor: colors.blue,borderBottomColor: '#757575',height:50
+        width:width,justifyContent:'center',alignItems:'center',height:50,backgroundColor: colors.blue,borderBottomColor: '#757575',height:50
     },
     text:{
         fontSize:23,fontWeight:'600',color:'#FFF'
