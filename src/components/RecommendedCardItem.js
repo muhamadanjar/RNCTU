@@ -12,10 +12,8 @@ class RecommendedCardItem extends Component {
     render() {
         return (
             <CardItem>
-
                 <View>
-                    <Image style={{ height: 90, width: 60 }}
-                        source={this.props.imageUri} />
+                    <Image style={{ height: 90, width: 60 }} source={this.props.imageUri} />
                 </View>
                 <Right style={{ flex: 1, alignItems: 'flex-start', height: 90, paddingHorizontal: 20 }}>
                     <Text>{this.props.itemName}</Text>
@@ -32,8 +30,6 @@ class RecommendedCardItem extends Component {
                         starSize={12}
                         fullStarColor='orange'
                         emptyStarColor='orange'
-
-
                     />
                 </Right>
             </CardItem>

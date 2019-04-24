@@ -7,17 +7,21 @@ import {
   ScrollView,
   Alert
 } from 'react-native';
+import PropTypes from 'prop-types'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { GoogleSignin, GoogleSigninButton,statusCodes } from 'react-native-google-signin';
+import { bindActionCreators } from 'redux';
+import * as ActionCreators from '../modules/auth/store/actions';
 import colors from '../utils/Colors';
 import transparentHeaderStyle from '../utils/navigation.styles';
 import RoundedButton from '../components/buttons/RoundedButton';
 import NavBarButton from '../components/buttons/NavBarButton';
 import styles from './styles/LoggedOut';
 import {webClientId} from '../utils/config'
+import { connect } from 'react-redux';
 const airbnbLogo = require('../assets/img/taxi.png');
 
-export default class LoggedOut extends Component {
+export class LoggedOut extends Component {
   state ={
     userInfo:null,
     error:null
@@ -34,10 +38,17 @@ export default class LoggedOut extends Component {
       // scopes: ['https://www.googleapis.com/auth/drive.readonly'],
       webClientId:webClientId,
     });
-    // this._getCurrentUser()
+    console.log(this.props);
+    if(this.props.isAuthenticated){
+      this.props.navigation.navigate('LoggedIn');
+    }
+    
   }
   componentDidUpdate(){
-    console.log(this.state);
+    console.log(this.props);
+    if(this.props.isAuthenticated){
+      this.props.navigation.navigate('LoggedIn');
+    }
     
   }
 
@@ -111,82 +122,96 @@ export default class LoggedOut extends Component {
   };
 
   render() {
-    return (
-      <ScrollView style={styles.wrapper}>
-        <View style={styles.welcomeWrapper}>
-          <Image
-            source={airbnbLogo}
-            style={styles.logo}
-          />
-          <Text style={styles.welcomeText}>
-Welcome to Utama Trans.
-          </Text>
-          <RoundedButton
-            text="Continue with Google"
-            textColor={colors.green01}
-            background={colors.white}
-            icon={<Icon name="google" size={20} style={styles.facebookButtonIcon} />}
-            handleOnPress={()=>this._signIn()}
-          />
-          <RoundedButton
-            text="Create Account"
-            textColor={colors.white}
-            handleOnPress={()=>this.onCreateAccountPress()}
-          />
+      return (
+        <ScrollView style={styles.wrapper}>
+          <View style={styles.welcomeWrapper}>
+            <Image
+              source={airbnbLogo}
+              style={styles.logo}
+            />
+            <Text style={styles.welcomeText}>
+  Selamat datang di Utama Trans
+            </Text>
+            <RoundedButton
+              text="Continue with Google"
+              textColor={colors.green01}
+              background={colors.white}
+              icon={<Icon name="google" size={20} style={styles.facebookButtonIcon} />}
+              handleOnPress={()=>this.props._signInWithGoogle()}
+            />
+            <RoundedButton
+              text="Create Account"
+              textColor={colors.white}
+              handleOnPress={()=>this.onCreateAccountPress()}
+            />
 
-          <TouchableHighlight
-            style={styles.moreOptionsButton}
-            onPress={()=>this.onMoreOptionsPress()}
-          >
-            <Text style={styles.moreOptionsButtonText}>
-              More options
-            </Text>
-          </TouchableHighlight>
-          <View style={styles.termsAndConditions}>
-            <Text style={styles.termsText}>
-              By tapping Continue, Create Account or More
-            </Text>
-            <Text style={styles.termsText}>
-              {' pilihan,'}
-            </Text>
-            <Text style={styles.termsText}>
-              {"saya setuju dengan Utama Trans"}
-            </Text>
-            <TouchableHighlight style={styles.linkButton}>
-              <Text style={styles.termsText}>
-                Terms of Service
+            <TouchableHighlight
+              style={styles.moreOptionsButton}
+              onPress={()=>this.onMoreOptionsPress()}
+            >
+              <Text style={styles.moreOptionsButtonText}>
+                Opsi Lainnya
               </Text>
             </TouchableHighlight>
-            <Text style={styles.termsText}>
-              ,
-            </Text>
-            <TouchableHighlight style={styles.linkButton}>
+            <View style={styles.termsAndConditions}>
               <Text style={styles.termsText}>
-                Payments Terms of Service
+                Dengan mengetuk Lanjutkan, Buat Akun atau Lainnya
               </Text>
-            </TouchableHighlight>
-            <Text style={styles.termsText}>
-              ,
-            </Text>
-            <TouchableHighlight style={styles.linkButton}>
               <Text style={styles.termsText}>
-                Privacy Policy
+                {' pilihan,'}
               </Text>
-            </TouchableHighlight>
-            <Text style={styles.termsText}>
-              , and
-            </Text>
-            <TouchableHighlight style={styles.linkButton}>
               <Text style={styles.termsText}>
-                Nondiscrimination Policy
+                {"saya setuju dengan Utama Trans"}
               </Text>
-            </TouchableHighlight>
-            <Text style={styles.termsText}>
-              .
-            </Text>
+              {/* <TouchableHighlight style={styles.linkButton}>
+                <Text style={styles.termsText}>
+                  Terms of Service
+                </Text>
+              </TouchableHighlight>
+              <Text style={styles.termsText}>
+                ,
+              </Text>
+              <TouchableHighlight style={styles.linkButton}>
+                <Text style={styles.termsText}>
+                  Payments Terms of Service
+                </Text>
+              </TouchableHighlight>
+              <Text style={styles.termsText}>
+                ,
+              </Text>
+              <TouchableHighlight style={styles.linkButton}>
+                <Text style={styles.termsText}>
+                  Privacy Policy
+                </Text>
+              </TouchableHighlight>
+              <Text style={styles.termsText}>
+                , and
+              </Text>
+              <TouchableHighlight style={styles.linkButton}>
+                <Text style={styles.termsText}>
+                  Nondiscrimination Policy
+                </Text>
+              </TouchableHighlight> */}
+              <Text style={styles.termsText}>
+                .
+              </Text>
+            </View>
           </View>
-        </View>
-      </ScrollView>
-    );
+        </ScrollView>
+      );
+
+    
   }
 }
+LoggedOut.propTypes = {
+  navigation: PropTypes.shape({
+    dispatch: PropTypes.func,
+  }).isRequired,
+  region: PropTypes.object
+};
+const mapStateToProps = (state) => ({
+  user:state.auth.user || {},
+  isAuthenticated:state.auth.isAuthenticated,
+});
+const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
+export default connect(mapStateToProps,mapDispatchToProps)(LoggedOut)

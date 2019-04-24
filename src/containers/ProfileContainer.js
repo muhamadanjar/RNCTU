@@ -25,7 +25,7 @@ var images = [
   require('../assets/feed_images/11.jpg'),
   require('../assets/feed_images/12.jpg'),
 ]
-export default class ProfileContainer extends Component {
+class ProfileContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -34,15 +34,15 @@ export default class ProfileContainer extends Component {
   }
   render() {
     return (
-      <Container style={styles.container}>
-                <Header style={{ paddingLeft: 10, paddingLeft: 10 }}>
-                    <Left>
-                        <Icon name="md-person-add" />
-                    </Left>
-                    <Right>
-                        <EntypoIcon name="back-in-time" style={{ fontSize: 32 }} />
-                    </Right>
-                </Header>
+        <Container style={styles.container}>
+            <Header style={{ paddingLeft: 10, paddingLeft: 10 }}>
+                <Left>
+                    <Icon name="md-person-add" />
+                </Left>
+                <Right>
+                    <EntypoIcon name="back-in-time" style={{ fontSize: 32 }} />
+                </Right>
+            </Header>
 
                 <Content>
 
@@ -148,13 +148,6 @@ export default class ProfileContainer extends Component {
                                 <Icon name="ios-people-outline" style={[{ fontSize: 32 }, this.state.activeIndex == 3 ? {} : { color: 'grey' }]}></Icon>
                             </Button>
                         </View>
-
-
-
-                        {/** Height =width/3 so that image sizes vary according to size of the phone yet remain squares **/}
-
-                        {this.renderSection()}
-
                     </View>
                 </Content>
             </Container >
@@ -233,3 +226,5 @@ const styles = StyleSheet.create({
     padding: 50,
   },
 });
+
+export default ProfileContainer

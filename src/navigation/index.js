@@ -29,7 +29,6 @@ export default createAppContainer(createSwitchNavigator({
   SignUp: SignUp,
   TurnOnNotifications:TurnOnNotifications,
   ForgotPassword:ForgotPassword,
-  
   Rental:Rental,
     
 }));

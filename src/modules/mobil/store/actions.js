@@ -95,13 +95,15 @@ import {
         if(store().mobil.selectedAddress.selectedPickUp && store().mobil.selectedAddress.selectedDropOff){
           HTTP.get("https://maps.googleapis.com/maps/api/distancematrix/json",
           {params:{
-            origins:store().mobil.selectedAddress.selectedPickUp.latitude + "," + store().mobil.selectedAddress.selectedPickUp.longitude,
-            destinations:store().mobil.selectedAddress.selectedDropOff.latitude + "," + store().mobil.selectedAddress.selectedDropOff.longitude,
+            origins:store().mobil.selectedAddress.selectedPickUp.location.latitude + "," + store().mobil.selectedAddress.selectedPickUp.location.longitude,
+            destinations:store().mobil.selectedAddress.selectedDropOff.location.latitude + "," + store().mobil.selectedAddress.selectedDropOff.location.longitude,
             mode:"driving",
             key:"AIzaSyDUYbTR-3PDWPhgxjENs4yf35g2eHc641s"
             //key:"AIzaSyD-0l6eDHRcYavjDzAzih7QhWdlEKIA7eI"
           }})
           .then((res)=>{
+            console.log(res);
+            
             dispatch({
               type:GET_DISTANCE_MATRIX,
               payload:res.data

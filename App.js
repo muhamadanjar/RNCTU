@@ -8,7 +8,6 @@ import {
   authCheck
 } from './src/modules/auth/store/actions'
 store().dispatch(authCheck())
-// const { AccessToken } = FBSDK
 export default class App extends Component {
   constructor(props){
     super(props);

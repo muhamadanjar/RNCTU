@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View,Text,ToastAndroid } from 'react-native'
-import HeaderComponent from '../components/HeaderComponent'
-import FormSearchBox from '../components/mobil/searchbox'
-import FormSearchResults from '../components/mobil/searchresult'
+import { View,Text,ToastAndroid,TouchableOpacity } from 'react-native'
 import Fare from '../components/mobil/fare'
 import colors from '../utils/Colors'
 import { connect } from 'react-redux';
@@ -14,6 +11,7 @@ import transparentHeaderStyle from '../utils/navigation.styles'
 import { NavigationActions } from 'react-navigation';
 import styles from './styles/Order'
 import MapContainer from '../containers/MapContainer'
+import RNGooglePlaces from 'react-native-google-places'
 const navigateToTabsAction = NavigationActions.navigate({
   routeName: 'LoggedIn',
 });
@@ -31,8 +29,21 @@ class Order extends Component{
     }
     componentDidMount() {
   		var rx = this;
-  		this.props.getCurrentLocation();
-  	}
+      this.props.getCurrentLocation();
+      RNGooglePlaces.getCurrentPlace(['placeID', 'location', 'name', 'address'])
+      .then((results) => console.log(results))
+      .catch((error) => console.log(error.message));
+
+    }
+    openSearchModal() {
+      RNGooglePlaces.openAutocompleteModal()
+      .then((place) => {
+      console.log(place);
+      // place represents user's selection from the
+      // suggestions and it is a simplified Google Place object.
+      })
+      .catch(error => console.log(error.message));  // error is a Javascript Error object
+    }
     render(){
       const { navigation,selectedAddress,getInputData,toggleSearchResultModal,getAddressPredictions,resultTypes,predictions,getSelectedAddress } = this.props;
       const { selectedPickUp, selectedDropOff } = selectedAddress || {};
@@ -43,7 +54,7 @@ class Order extends Component{
         longitudeDelta:0.0421
       }
       return (
-        <View>
+        <View style={{flex:1}}>
           {/* <HeaderComponent/> */}
           <MapContainer region={this.props.region} 
 							getInputData={getInputData}
@@ -54,10 +65,17 @@ class Order extends Component{
 							getSelectedAddress={this.props.getSelectedAddress}
 							selectedAddress={selectedAddress}
 							carMarker={carMarker}
-							nearByDrivers={this.props.nearByDrivers}/>
+							nearByDrivers={this.props.nearByDrivers}
+          />
           {
 							this.props.fare &&  <Fare fare={this.props.fare} />
           }
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.openSearchModal()}
+          >
+            <Text>Open Place Picker</Text>
+          </TouchableOpacity>
         </View>
       )
     }

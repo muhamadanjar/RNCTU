@@ -26,7 +26,7 @@ const reducer = (state = initialState, { type, payload = null }) => {
       case AUTH_LOGIN_SAMPLE:
         return loginSample(payload.email,payload.password)
       case AUTH_LOGIN_GOOGLE:
-        return _signInWithGoogle()
+        return {...state,isAuthenticated:true,user:payload.user}
       case AUTH_LOGIN:
         return login(state, payload);
       case AUTH_CHECK:
@@ -45,38 +45,12 @@ const reducer = (state = initialState, { type, payload = null }) => {
 };
 
 function login(state, payload) {
-    const url = `${BASE_URL}/${API_VERSION}/${LOGIN_URL}`
-    console.log(url,payload);
-    let header = {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Accept': 'application/json'}
-    
-    HTTP.post(url,payload,header).then((res)=>{
-      let data = res.data;
-      if (data.success) {
-        AsyncStorage.setItem('access_token', data.data.token);
-        HTTP.defaults.headers.common['Authorization'] = `Bearer ${payload}`;  
-        state = Object.assign({}, state, {
-          isAuthenticated: !!AsyncStorage.getItem('access_token'),
-          token:data
-        })
-        return true;
-      }
-      
-    }).catch((error)=>console.log(error));
-    
     return {
-        ...state, isAuthenticated: true,
+        ...state, payload,
     }
 }
 function register(payload){
-  const url = `${BASE_URL}/${API_VERSION}/${REGISTER}`
-  HTTP.post(url,payload).then((res)=>{
-    const response = res.data;
-    if(response){
-      return true;
-    }
-  }).catch((err)=>{console.error(err);return false;})
+ return{...state}
 
 }
 function loginSample(email,password) {
@@ -91,21 +65,20 @@ function loginSample(email,password) {
   return action;
 }
 
-function checkAuth(state) {
+async function checkAuth(state) {
     try {
-      const value = AsyncStorage.getItem('access_token')
-      if(value !== null) {
-        value.finally((data)=>{
-          state = Object.assign({}, state, {
-            isAuthenticated: !!AsyncStorage.getItem('access_token'),
-            token:data
-          })
-          if (state.isAuthenticated) {
-            HTTP.defaults.headers.common['Authorization'] = `Bearer ${data}`;
-          }
-        })
-        return state;
+      const value = await AsyncStorage.getItem('access_token')
+      console.log(value);
+      state = Object.assign({}, state, {
+        isAuthenticated: true,
+        token:value
+      })
+      if (state.isAuthenticated) {
+        HTTP.defaults.headers.common['Authorization'] = `Bearer ${value}`;
       }
+      console.log(state);
+      
+      return state;
     } catch(e) {
       // error reading value
     }
@@ -126,70 +99,6 @@ function resetPassword(state) {
     }
 }
 
-
-_signInWithGoogle = async () => {
-  try {
-    await GoogleSignin.hasPlayServices();
-    const userInfo = await GoogleSignin.signIn();
-    console.log('User --->',userInfo);
-    this.setState({ userInfo, error: null });
-    state = Object.assign({}, state, {
-      isAuthenticated:true,
-      userInfo
-    });
-  } catch (error) {
-    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-      // sign in was cancelled
-      // Alert.alert('cancelled');
-      dispatch({type:AUTH_ALERT,payload:'camceled'})
-    } else if (error.code === statusCodes.IN_PROGRESS) {
-      // operation in progress already
-      // Alert.alert('in progress');
-      dispatch({type:AUTH_ALERT,payload:'in progress'})
-    } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-      // Alert.alert('play services not available or outdated');
-      dispatch({type:AUTH_ALERT,payload:'play services not available or outdated'})
-    } else {
-      // Alert.alert('Something went wrong', error.toString());
-      dispatch({type:AUTH_ALERT,payload:'Something went wrong '+error.toString() })
-      // this.setState({
-      //   error,
-      // });
-    }
-  }
-};
-_getCurrentUserGoogle = async () => {
-  try {
-    const userInfo = await GoogleSignin.signInSilently();
-    console.log(userInfo);
-    
-    this.setState({ userInfo });
-  } catch (error) {
-    console.error(error);
-  }
-};
-_signOutGoogle = async () => {
-  try {
-    await GoogleSignin.revokeAccess();
-    await GoogleSignin.signOut();
-
-    this.setState({ userInfo: null, error: null });
-  } catch (error) {
-    this.setState({
-      error,
-    });
-  }
-};
-
-_revokeAccess = async () => {
-  //Remove your application from the user authorized applications.
-  try {
-    await GoogleSignin.revokeAccess();
-    console.log('deleted');
-  } catch (error) {
-    console.error(error);
-  }
-};
   
 export const getAuth = state => state.auth.isAuthenticated;  
 export default reducer;

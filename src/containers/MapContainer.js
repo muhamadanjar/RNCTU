@@ -1,6 +1,5 @@
 import React,{Component} from 'react'
-import { View } from 'react-native'
-import styles from '../screens/styles/Order'
+import { View,StyleSheet } from 'react-native'
 import FormSearchBox from '../components/mobil/searchbox'
 import FormSearchResults from '../components/mobil/searchresult'
 import MapView from 'react-native-maps'
@@ -20,7 +19,7 @@ export class MapContainer extends Component{
         const {selectedAddress,getInputData,toggleSearchResultModal,getAddressPredictions,resultTypes,predictions,getSelectedAddress } = this.props;
         const { selectedPickUp, selectedDropOff } = selectedAddress || {};
         return(
-        <View style={styles.wrapper}>
+        <View style={styles.container}>
           <MapView
               provider={MapView.PROVIDER_GOOGLE}
               style={styles.map}
@@ -52,5 +51,16 @@ export class MapContainer extends Component{
           }
         </View>)
     }
+}
+
+const styles = {
+	container:{
+		flex:1,
+		justifyContent:"center",
+		alignItems:"center"
+	},
+	map:{
+		...StyleSheet.absoluteFillObject
+	}
 }
 export default MapContainer
