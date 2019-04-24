@@ -1,19 +1,28 @@
 import React,{Component} from 'react'
-import { View,StyleSheet } from 'react-native'
+import { View,StyleSheet,Dimensions,Text } from 'react-native'
 import FormSearchBox from '../components/mobil/searchbox'
 import FormSearchResults from '../components/mobil/searchresult'
 import MapView from 'react-native-maps'
+import { Button } from 'react-native-elements';
+import Colors from '../utils/Colors';
+import Icon from 'react-native-vector-icons/FontAwesome'
+const {width,height} = Dimensions.get('window')
+
 export class MapContainer extends Component{
     state ={
         region : {
-            latitude:5.5195655,
-            longitude:95.3815473,
+            latitude:3.6422756,
+            longitude:98.5294038,
             latitudeDelta:0.0922,
             longitudeDelta:0.0421
         }
     }
     constructor(props){
         super(props)
+    }
+    handleOrder(){
+      let payload = {harga:this.props.fare}
+      this.props.bookCar(payload);
     }
     render(){
         const {selectedAddress,getInputData,toggleSearchResultModal,getAddressPredictions,resultTypes,predictions,getSelectedAddress } = this.props;
@@ -25,20 +34,44 @@ export class MapContainer extends Component{
               style={styles.map}
               region={this.state.region}
               initialRegion={this.state.region}
+              ref={ref => { this.map = ref; }}
           >
             { selectedPickUp &&
               <MapView.Marker
                 coordinate={{latitude:selectedPickUp.location.latitude, longitude:selectedPickUp.location.longitude}}
                 pinCol  or="green"
-              />
+              >
+                <View style={styles.marker}>
+                  <Text style={styles.text}>{selectedPickUp.name}</Text>
+                  <Icon name="chevron-right" size={25}/>
+                </View>
+              </MapView.Marker>
             }
             { selectedDropOff &&
               <MapView.Marker
                 coordinate={{latitude:selectedDropOff.location.latitude, longitude:selectedDropOff.location.longitude}}
                 pinColor="blue"
-              />
+              >
+                <View style={styles.marker}>
+                  <Text style={styles.text}>{selectedPickUp.name}</Text>
+                  <Icon name="chevron-right" size={25}/>
+                </View>
+              </MapView.Marker>
+
             }
           </MapView>
+          {this.props.fare &&
+          <View style={styles.infoBox}>
+            <View style={styles.infoWrapper}>
+              <View style={{padding:5,alignItems:'center'}}>
+                <Text style={{fontSize:25}}>{this.props.fare}</Text>
+              </View>
+              <View style={{alignItems:'center'}}>
+                <Button raised icon={{name: 'cached'}} title='Pesan' onPress={()=>this.handleOrder()} />
+              </View>
+            </View>
+          </View>
+          }
           
           <FormSearchBox
     				getInputData={getInputData}
@@ -61,6 +94,38 @@ const styles = {
 	},
 	map:{
 		...StyleSheet.absoluteFillObject
-	}
+  },
+  infoBox:{
+    width:width,
+    position:'absolute',
+    bottom:40,
+    flex:1,
+    
+  },
+  infoWrapper:{
+    marginLeft:15,
+    marginRight:10,
+    marginTop:10,
+    marginBottom:0,
+    backgroundColor:"#fff",
+    opacity:0.9,
+    height:75,
+    borderRadius:7,
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+
+  marker: {
+    backgroundColor: Colors.green01,
+    padding: 5,
+    borderRadius: 5,
+  },
+  marketText: {
+    color: Colors.primary,
+    fontWeight: "bold"
+  }
+
+  
 }
 export default MapContainer

@@ -20,6 +20,7 @@ import {
   import HTTP from '../../../utils/Http'
   import {calculateFare,calculateFareInKM} from '../../../utils/fareCalculator'
   import RNGooglePlaces from 'react-native-google-places';
+  import {BOOKING_URL} from '../../../utils/config'
   export function getCurrentLocation(){
     return(dispatch)=>{
       navigator.geolocation.getCurrentPosition(
@@ -196,9 +197,9 @@ import {
             longitude:nearByDriver.coordinate.coordinates[0]
           }*/
       };
-      const order = firebase.database().ref('bookings').push();
-      data.keyuuid = order.key;
-      order.set(data);
+      // const order = firebase.database().ref('bookings').push();
+      // data.keyuuid = order.key;
+      // order.set(data);
       const payload = JSON.stringify(data);
       console.log(payload);
       fetch(BOOKING_URL,{
