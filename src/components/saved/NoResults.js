@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   	paddingBottom: 15,
   	marginTop: 16,
   	borderRadius: 3,
-  	backgroundColor: colors.pink,
+  	backgroundColor: colors.green03,
   },
   findHomesButtonText: {
     color: colors.white,

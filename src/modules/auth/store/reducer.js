@@ -1,5 +1,4 @@
 import HTTP from '../../../utils/Http';
-import axios from 'axios'
 import {
   AUTH_CHECK,
   AUTH_LOGIN,
@@ -49,8 +48,8 @@ function login(state, payload) {
         ...state, payload,
     }
 }
-function register(payload){
- return{...state}
+function register(state,  payload){
+ return {...state,payload}
 
 }
 function loginSample(email,password) {

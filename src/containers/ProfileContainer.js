@@ -4,13 +4,16 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  Image
+  Image,
+  ScrollView
 } from 'react-native';
 import { Container, Content, Icon, Header, Left, Body, Right, Segment, Button } from 'native-base'
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 var { height, width } = Dimensions.get('window');
 import CardComponent from '../components/CardComponent'
+import Colors from '../utils/Colors';
+import { Divider, Block } from '../components';
 var images = [
   require('../assets/feed_images/1.jpg'),
   require('../assets/feed_images/2.jpg'),
@@ -35,7 +38,7 @@ class ProfileContainer extends Component {
   render() {
     return (
         <Container style={styles.container}>
-            <Header style={{ paddingLeft: 10, paddingLeft: 10 }}>
+            <Header style={{ paddingLeft: 10, paddingLeft: 10,backgroundColor:Colors.secondary }}>
                 <Left>
                     <Icon name="md-person-add" />
                 </Left>
@@ -109,9 +112,9 @@ class ProfileContainer extends Component {
 
                         <View style={{ paddingBottom: 10 }}>
                             <View style={{ paddingHorizontal: 10 }}>
-                                <Text style={{ fontWeight: 'bold' }}>Varun Nath</Text>
-                                <Text>Lark | Computer Jock | Commercial Pilot</Text>
-                                <Text>www.unsureprogrammer.com</Text>
+                                <Text style={{ fontWeight: 'bold' }}>Ihwan</Text>
+                                <Text>Future Media</Text>
+                                <Text></Text>
                             </View>
                         </View>
 
@@ -149,6 +152,53 @@ class ProfileContainer extends Component {
                             </Button>
                         </View>
                     </View>
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        <Block style={styles.inputs}>
+                            <Block row space="between" margin={[10, 0]} style={styles.inputRow}>
+                            <Block>
+                                <Text gray2 style={{ marginBottom: 10 }}>Username</Text>
+                                {this.renderEdit('username')}
+                            </Block>
+                            <Text medium secondary onPress={() => this.toggleEdit('username')}>
+                                {editing === 'username' ? 'Save' : 'Edit'}
+                            </Text>
+                            </Block>
+                            <Block row space="between" margin={[10, 0]} style={styles.inputRow}>
+                            <Block>
+                                <Text gray2 style={{ marginBottom: 10 }}>Location</Text>
+                                {this.renderEdit('location')}
+                            </Block>
+                            <Text medium secondary onPress={() => this.toggleEdit('location')}>
+                                {editing === 'location' ? 'Save' : 'Edit'}
+                            </Text>
+                            </Block>
+                            <Block row space="between" margin={[10, 0]} style={styles.inputRow}>
+                            <Block>
+                                <Text gray2 style={{ marginBottom: 10 }}>E-mail</Text>
+                                <Text bold>{profile.email}</Text>
+                            </Block>
+                            </Block>
+                        </Block>
+                        <Divider />
+
+                        <Block style={styles.toggles}>
+                            <Block row center space="between" style={{ marginBottom: theme.sizes.base * 2 }}>
+                                <Text gray2>Notifications</Text>
+                                <Switch
+                                value={this.state.notifications}
+                                onValueChange={value => this.setState({ notifications: value })}
+                                />
+                            </Block>
+                            
+                            <Block row center space="between" style={{ marginBottom: theme.sizes.base * 2 }}>
+                                <Text gray2>Newsletter</Text>
+                                <Switch
+                                value={this.state.newsletter}
+                                onValueChange={value => this.setState({ newsletter: value })}
+                                />
+                            </Block>
+                        </Block>
+                    </ScrollView>
                 </Content>
             </Container >
     );

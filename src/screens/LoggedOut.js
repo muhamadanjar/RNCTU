@@ -130,18 +130,20 @@ export class LoggedOut extends Component {
               style={styles.logo}
             />
             <Text style={styles.welcomeText}>
-  Selamat datang di Utama Trans
+              Selamat datang di Utama Trans
             </Text>
             <RoundedButton
-              text="Continue with Google"
-              textColor={colors.green01}
-              background={colors.white}
+              text="Masuk dengan Google"
+              textColor={colors.white}
+              background={colors.blue}
               icon={<Icon name="google" size={20} style={styles.facebookButtonIcon} />}
               handleOnPress={()=>this.props._signInWithGoogle()}
             />
             <RoundedButton
-              text="Create Account"
+              text="Buat Akun"
               textColor={colors.white}
+              background={colors.blue}
+              icon={<Icon name="user" size={20} style={styles.facebookButtonIcon} />}
               handleOnPress={()=>this.onCreateAccountPress()}
             />
 

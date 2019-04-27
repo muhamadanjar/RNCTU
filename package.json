@@ -8,6 +8,7 @@
     "android-linux": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android"
   },
   "dependencies": {
+    "@mapbox/polyline": "^1.0.0",
     "@react-native-community/async-storage": "^1.2.1",
     "axios": "^0.18.0",
     "jest-haste-map": "^24.0.0",

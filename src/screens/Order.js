@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View,Text,ToastAndroid,TouchableOpacity } from 'react-native'
-import Fare from '../components/mobil/fare'
+
 import colors from '../utils/Colors'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as ActionCreators from '../modules/mobil/store/actions';
-import MapView from "react-native-maps";
+import HeaderComponent from '../components/HeaderComponent'
 import transparentHeaderStyle from '../utils/navigation.styles'
 import { NavigationActions } from 'react-navigation';
 import styles from './styles/Order'
@@ -59,9 +59,7 @@ class Order extends Component{
       }
       return (
         <View style={{flex:1}}>
-          <Header>
-            <Title>Trans Utama</Title>
-          </Header>
+          <HeaderComponent text={'Pemesanan'}/>
           <MapContainer region={this.props.region} 
 							getInputData={getInputData}
 							toggleSearchResultModal={this.props.toggleSearchResultModal}

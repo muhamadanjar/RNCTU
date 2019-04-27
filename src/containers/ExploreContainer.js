@@ -94,7 +94,7 @@ class ExploreContainer extends Component {
             Selamat Datang di Utama Trans
           </Text>
           <View style={styles.products}>
-            <CircleButton text={'Rental'} handleOnPress={()=>navigate('CreateList')} imageSource={require('../assets/img/rental.png')}/>
+            <CircleButton text={'Rental'} handleOnPress={()=>navigate('Rental')} imageSource={require('../assets/img/rental.png')}/>
             <CircleButton text={'Taxi'} handleOnPress={()=>navigate('Order')} imageSource={require('../assets/img/taxi.png')}/>
           </View>
           <View style={styles.categories}>

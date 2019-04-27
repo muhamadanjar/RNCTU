@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   icon: {
-    color: colors.green01,
+    color: colors.blue,
     marginBottom: 15,
   },
   title: {

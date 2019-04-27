@@ -8,5 +8,7 @@ export const BOOKING_URL = `${BASE_URL}/${API_VERSION}/${BOOKING}`
 export const USER_PROFILE = 'users/profile'
 export const REGISTER = 'register'
 export const LOGIN_URL = 'login'
-
+export const LOGIN_POST = `${BASE_URL}/${API_VERSION}/login`
+export const REGISTER_POST = `${BASE_URL}/${API_VERSION}/register`
+export const PROMO_GET = `${BASE_URL}/${API_VERSION}/get_promo`
 export const webClientId = '1019637452944-rtor33do97fgl35rn20h5st32tl9a124.apps.googleusercontent.com'

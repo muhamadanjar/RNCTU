@@ -170,8 +170,8 @@ class LogIn extends Component {
             showNotification={showNotification}
             handleCloseNotification={this.handleCloseNotification}
             type="Error"
-            firstLine="Those credentials don't look right."
-            secondLine="Please try again."
+            firstLine="Akun yang anda masukan salah."
+            secondLine="Silakan coba lagi."
           />
         </View>
       </KeyboardAvoidingView>

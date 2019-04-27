@@ -11,7 +11,7 @@ import {
     AUTH_LOGIN_GOOGLE
   } from './action-types';
 import { GoogleSignin, GoogleSigninButton,statusCodes } from 'react-native-google-signin';
-import {BASE_URL,API_VERSION,LOGIN_URL,REGISTER} from '../../../utils/config'
+import {BASE_URL,API_VERSION,LOGIN_POST, REGISTER_POST} from '../../../utils/config'
 import HTTP from '../../../utils/Http'
 import AsyncStorage from '@react-native-community/async-storage';
   export function authCheck() {
@@ -23,7 +23,7 @@ import AsyncStorage from '@react-native-community/async-storage';
   export function authLogin(payload) {
     return async (dispatch)=>{
       try {
-        const url = `${BASE_URL}/${API_VERSION}/${LOGIN_URL}`
+        const url = `${LOGIN_POST}`
         let header = {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': 'application/json'}
@@ -93,15 +93,18 @@ import AsyncStorage from '@react-native-community/async-storage';
 
   export function authRegister(payload){
     return (dispatch)=>{
-      const url = `${BASE_URL}/${API_VERSION}/${REGISTER}`
+      const url = `${REGISTER_POST}`
       console.log(url,payload);
       HTTP.post(url,payload).then((res)=>{
         const response = res.data;
         if(response){
-          dispatch({
-            type: AUTH_REGISTER,
-            payload:response
-          })
+          if (response.status) {
+            dispatch({
+              type: AUTH_REGISTER,
+              payload:response
+            })  
+          }
+          
         }
         })
       .catch((err)=>{console.error(err);return false;})

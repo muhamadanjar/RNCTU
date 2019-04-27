@@ -56,7 +56,7 @@ export default class TurnOnNotifications extends Component {
   render() {
     const { pressNotifyBtn, pressSkipBtn } = this.state;
     const { navigation } = this.props;
-    const notifyBtnColor = pressNotifyBtn ? colors.green02 : colors.green01;
+    const notifyBtnColor = pressNotifyBtn ? colors.blue2 : colors.blue;
     return (
       <View style={styles.wrapper}>
         <View style={styles.content}>
@@ -66,11 +66,10 @@ export default class TurnOnNotifications extends Component {
             style={styles.icon}
           />
           <Text style={styles.title}>
-            Turn on notifications?
+            Nyalakan Notifikasi?
           </Text>
           <Text style={styles.description}>
-            We can let you know when someone messages you,
-            or notify you about other important account activity.
+            kami akan memberi tahu anda jika seseorang mengirim pesan kepada anda.
           </Text>
           <TouchableHighlight
             style={[
@@ -83,7 +82,7 @@ export default class TurnOnNotifications extends Component {
             underlayColor={colors.green02}
           >
             <Text style={[{ color: colors.white }, styles.buttonText]}>
-  Yes, notify me
+  Beri tahu saya
             </Text>
           </TouchableHighlight>
           <TouchableHighlight
@@ -93,8 +92,8 @@ export default class TurnOnNotifications extends Component {
             onHideUnderlay={this.handleSkipBtnHideUnderlay}
             underlayColor={colors.gray01}
           >
-            <Text style={[{ color: colors.green01 }, styles.buttonText]}>
-  Skip
+            <Text style={[{ color: colors.blue }, styles.buttonText]}>
+  Lewati
             </Text>
           </TouchableHighlight>
         </View>

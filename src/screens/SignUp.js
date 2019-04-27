@@ -11,19 +11,23 @@ import colors from '../utils/Colors'
 import HeaderComponent from '../components/HeaderComponent'
 import { View } from 'native-base';
 import RoundedButton from '../components/buttons/RoundedButton';
+import Colors from '../utils/Colors';
 export class SignUp extends Component {
   state = {
     email: null,
+    name:null,
     username: null,
     password: null,
     no_telepon:null,
+    c_password:null,
     errors: [],
+    formValid:true,
     loading: false,
   }
 
   handleSignUp() {
     const { navigation } = this.props;
-    const { email, username, password,no_telepon } = this.state;
+    const { email,name, username, password,no_telepon,c_password } = this.state;
     const errors = [];
 
     Keyboard.dismiss();
@@ -33,19 +37,25 @@ export class SignUp extends Component {
     if (!email) errors.push('email');
     if (!username) errors.push('username');
     if (!password) errors.push('password');
+    if (!no_telepon) errors.push('no_telepon');
+    if (!name) errors.push('name');
 
     this.setState({ errors, loading: false });
 
     if (!errors.length) {
-      const payload = {email:email,password:password,username:username,no_telp:no_telepon};
-      this.props.authRegister(payload)
+      const payload = {name:name,email:email,password:password,username:username,no_telepon:no_telepon,c_password:c_password};
+      console.log(payload);
+      
+      let register = this.props.authRegister(payload);
+      
+      
       Alert.alert(
-        'Success!',
-        'Your account has been created',
+        'Berhasil!',
+        'Akun anda Berhasil di buat',
         [
           {
             text: 'Continue', onPress: () => {
-              navigation.navigate('Browse')
+              navigation.navigate('LoggedIn')
             }
           }
         ],
@@ -78,6 +88,7 @@ export class SignUp extends Component {
                 onChangeText={text => this.setState({ email: text })}
               />
             </KeyboardAvoidingView>
+            <KeyboardAvoidingView>
               <Input
                 label="Username"
                 error={hasErrors('username')}
@@ -85,6 +96,16 @@ export class SignUp extends Component {
                 defaultValue={this.state.username}
                 onChangeText={text => this.setState({ username: text })}
               />
+            </KeyboardAvoidingView>
+            <KeyboardAvoidingView>
+              <Input
+                label="Nama Lengkap"
+                error={hasErrors('name')}
+                style={[styles.input, hasErrors('name')]}
+                defaultValue={this.state.name}
+                onChangeText={text => this.setState({ name: text })}
+              />
+            </KeyboardAvoidingView>
             <KeyboardAvoidingView>
               <Input
                 label="No Telepon"
@@ -105,18 +126,38 @@ export class SignUp extends Component {
                 onChangeText={text => this.setState({ password: text })}
               />
             </KeyboardAvoidingView>
-              <Button gradient onPress={() => this.handleSignUp()}>
+            <KeyboardAvoidingView>
+              <Input
+                secure
+                label="Ketik Ulang Password"
+                error={hasErrors('c_password')}
+                style={[styles.input, hasErrors('c_password')]}
+                defaultValue={this.state.c_password}
+                onChangeText={text => this.setState({ c_password: text })}
+              />
+            </KeyboardAvoidingView>
+              <Button gradient startColor={Colors.blue} endColor={Colors.blue2} onPress={() => this.handleSignUp()}>
                 {loading ?
                   <ActivityIndicator size="small" color="white" /> :
-                  <Text bold white center>Sign Up</Text>
+                  <Text bold white center>Daftar </Text>
                 }
               </Button>
 
               <Button onPress={() => navigation.navigate('Auth')}>
                 <Text  caption center style={{ textDecorationLine: 'underline' }}>
-                  Back to Login
+                  Sudah punya Akun
                 </Text>
               </Button>
+
+              {/* <View style={[styles.notificationWrapper, { marginTop: notificationMarginTop }]}>
+                <Notification
+                  showNotification={showNotification}
+                  handleCloseNotification={this.handleCloseNotification}
+                  type="Error"
+                  firstLine="ada kesalahan dengan inputan anda."
+                  secondLine="Silakan coba lagi."
+                />
+              </View> */}
             </Block>
           </Block>
         
