@@ -11,13 +11,24 @@ import {
     AUTH_LOGIN_GOOGLE
   } from './action-types';
 import { GoogleSignin, GoogleSigninButton,statusCodes } from 'react-native-google-signin';
-import {BASE_URL,API_VERSION,LOGIN_POST, REGISTER_POST} from '../../../utils/config'
+import {USER_GET,LOGIN_POST, REGISTER_POST} from '../../../utils/config'
 import HTTP from '../../../utils/Http'
 import AsyncStorage from '@react-native-community/async-storage';
-  export function authCheck() {
-    return {
-      type: AUTH_CHECK,
+  export function authCheck(payload) {
+    return dispatch =>{
+      let header = {
+        'Authorization': `Bearer ${payload}`,
+        'Accept': 'application/json'}
+      HTTP.get(USER_GET,header).then((res)=>{
+        let response = res.data;
+        if(status){
+          dispatch( {
+            type: AUTH_CHECK,
+          });
+        }
+      });
     }
+    
   }
 
   export function authLogin(payload) {

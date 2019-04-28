@@ -6,6 +6,8 @@ import colors from '../utils/Colors'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as ActionCreators from '../modules/mobil/store/actions';
+import * as mainActions from '../modules/app/store/action'
+
 import HeaderComponent from '../components/HeaderComponent'
 import transparentHeaderStyle from '../utils/navigation.styles'
 import { NavigationActions } from 'react-navigation';
@@ -30,6 +32,7 @@ class Order extends Component{
       super(props)
     }
     componentDidMount() {
+      this.props.getPromo()
   		var rx = this;
       this.props.getCurrentLocation();
       RNGooglePlaces.getCurrentPlace(['placeID', 'location', 'name', 'address'])
@@ -59,7 +62,7 @@ class Order extends Component{
       }
       return (
         <View style={{flex:1}}>
-          <HeaderComponent text={'Pemesanan'}/>
+          <HeaderComponent IconOnpress={()=>this.props.navigation.goBack()} text={'Reguler'}/>
           <MapContainer region={this.props.region} 
 							getInputData={getInputData}
 							toggleSearchResultModal={this.props.toggleSearchResultModal}
@@ -97,6 +100,10 @@ const mapStateToProps = (state) => ({
 	mobilavailable:state.mobil.mobilavailable || {},
 	user:state.auth.user || {},
 });
-const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
+// const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
+const mapDispatchToProps = {
+  ...ActionCreators,
+  ...mainActions,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Order);

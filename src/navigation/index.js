@@ -1,9 +1,7 @@
 import React from 'react';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator,createStackNavigator } from 'react-navigation';
 import MainTabNavigator from './MainTab';
-import AuthScreen from '../pages/Login'
-import SwiperComponent from '../screens/Swiper'
-import AmazonHome from '../screens/AmazonHome'
+
 import SignUp from '../screens/SignUp'
 import Order from '../screens/Order'
 import Rental from '../screens/Rental'
@@ -12,23 +10,28 @@ import LogIn from '../screens/LogIn'
 import TurnOnNotifications from '../screens/TurnOnNotifications'
 import ForgotPassword from '../screens/ForgotPassword'
 import LoggedInTabNavigator from './LoggedInTabNavigator'
-
-export default createAppContainer(createSwitchNavigator({
-  // AmazonHome:AmazonHome,
-  // Swiper:SwiperComponent,
-  Main: LoggedOut,
-  LoggedIn: {
-    screen: LoggedInTabNavigator,
-    navigationOptions: {
-      header: null,
-      gesturesEnabled: false,
-    },
-  },  
-  Auth: LogIn,
+const LoggedInCustomer = createStackNavigator({
+  LoggedInMain: LoggedInTabNavigator,
   Order:Order,
+  Rental:Rental,
+},{
+  initialRouteName:'LoggedInMain',
+  headerMode:'none'
+})
+const LoggedInDriver = createStackNavigator({
+  LoggedInMain: LoggedInTabNavigator,
+  Order:Order,
+  Rental:Rental,
+},{
+  initialRouteName:'LoggedInMain',
+  headerMode:'none'
+})
+export default createAppContainer(createSwitchNavigator({
+  Main: LoggedOut,
+  LoggedIn: LoggedInCustomer,
+  Auth: LogIn,
   SignUp: SignUp,
   TurnOnNotifications:TurnOnNotifications,
   ForgotPassword:ForgotPassword,
-  Rental:Rental,
-    
+  
 }));

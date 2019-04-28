@@ -155,28 +155,6 @@ class ProfileContainer extends Component {
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <Block style={styles.inputs}>
                             <Block row space="between" margin={[10, 0]} style={styles.inputRow}>
-                            <Block>
-                                <Text gray2 style={{ marginBottom: 10 }}>Username</Text>
-                                {this.renderEdit('username')}
-                            </Block>
-                            <Text medium secondary onPress={() => this.toggleEdit('username')}>
-                                {editing === 'username' ? 'Save' : 'Edit'}
-                            </Text>
-                            </Block>
-                            <Block row space="between" margin={[10, 0]} style={styles.inputRow}>
-                            <Block>
-                                <Text gray2 style={{ marginBottom: 10 }}>Location</Text>
-                                {this.renderEdit('location')}
-                            </Block>
-                            <Text medium secondary onPress={() => this.toggleEdit('location')}>
-                                {editing === 'location' ? 'Save' : 'Edit'}
-                            </Text>
-                            </Block>
-                            <Block row space="between" margin={[10, 0]} style={styles.inputRow}>
-                            <Block>
-                                <Text gray2 style={{ marginBottom: 10 }}>E-mail</Text>
-                                <Text bold>{profile.email}</Text>
-                            </Block>
                             </Block>
                         </Block>
                         <Divider />

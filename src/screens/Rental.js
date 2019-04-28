@@ -1,37 +1,53 @@
 import React, { Component } from 'react'
-import { View,Text,TouchableHighlight,StyleSheet,Image,Picker } from 'react-native'
+import { View,Text,TouchableHighlight,TouchableOpacity,StyleSheet,Image,FlatList,Dimensions } from 'react-native'
 import PropTypes from 'prop-types'
 import HeaderComponent from '../components/HeaderComponent'
 import Colors from '..//utils/Colors'
-export default class Rental  extends Component{
+import * as mainActions from '../modules/app/store/action'
+import Modal from 'react-native-modal'
+import { connect } from 'react-redux';
+import { ListItem } from 'react-native-elements';
+const {width,height} = Dimensions.get('window');
+const listItems = ['Development', 'Business', 'IT & Software', 'Office Productivity', 'Personal Development', 'Design', 'Marketing', 'LifeStyle', 'Photography', 'Health & Fitness', 'Teacher Training', 'Music']
+class Rental  extends Component{
     state = {
-        user:null
+        user:null,
+        durasi:null,
+        visibleModal:null,
+        durationPesan:null,
+        durationList:null
     }
     constructor(props){
         super(props)
         
     }
+    componentDidMount(){
+        this.props.getTypeCar();
+    }
     render(){
         return(
             <View style={styles.wrapper}>
-                <HeaderComponent text={'Rental Mobil'}></HeaderComponent>
+                <HeaderComponent 
+                navigation={this.props.navigation}
+                icon={'arrow-left'}
+                IconOnpress={()=>this.props.navigation.goBack()} 
+                text={'Rencar'}/>
                 <View style={styles.imageContainer}>
                     <Image style={styles.image} source={require('../assets/img/rental.png')}/>
                     <View style={{paddingLeft:5,marginTop:20,alignContent:'center',alignItems:'center',justifyContent:'center'}}>
                         <Text style={{fontSize:25,fontWeight:'800'}}>Pesan per Jam</Text>
                         <Text style={{fontSize:20}}>dapatkan mobil dan supir untuk durasi yang anda inginkan</Text>
                     </View>
-                    
                 </View>
                 <View style={styles.formContainer}>
-                    <View style={styles.form}>
-                        <Text>Tes</Text>
-                        <Picker selectedValue = {this.state.user} onValueChange = {this.updateUser}  itemStyle={{ backgroundColor: "grey", color: "blue", fontFamily:"Ebrima", fontSize:17 }}>
-                            <Picker.Item label = "Steve" value = "steve" />
-                            <Picker.Item label = "Ellen" value = "ellen" />
-                            <Picker.Item label = "Maria" value = "maria" />
-                        </Picker>
+                    <View style={styles.inputWrapper}>
+                        <Text style={styles.textInput}>{this.state.durationPesan}</Text>
                     </View>
+                    {this.renderButton('Pilih',()=>this.setState({visibleModal:1}))}
+                    {this.renderButton('Pesan',()=>this.handlePesan())}
+                    <Modal isVisible={this.state.visibleModal === 1}>
+                        {this.renderModalContent(this.props.typecar)}
+                    </Modal>
                 </View>
             </View>
         )
@@ -39,14 +55,66 @@ export default class Rental  extends Component{
     updateUser = (user) => {
         this.setState({user:user})
     }
+    renderButton = (text, onPress) => (
+        <TouchableOpacity onPress={onPress}>
+          <View style={styles.button}>
+            <Text>{text}</Text>
+          </View>
+        </TouchableOpacity>
+    );
+    renderModalContent = (listItems) => {
+        console.log(listItems);
+        
+        return(
+        <View style={styles.modalContent}>
+            {/* <FlatList
+                style={{ backgroundColor: this.state.searchBarFocused ? Colors.blue3 : 'white' }}
+                data={listItems}
+                renderItem={({ item }) => this.renderItem(item)}
+                keyExtractor={(item, index) => index.toString()}/> */}
+            
+          {this.renderButton("Tutup", () => this.setState({ visibleModal: null }))}
+        </View>
+    )};
+    renderItem = (item)=>{
+        return(
+            <ListItem
+            roundAvatar
+            title={`${item.type}`}
+            avatar={{ uri: item.image }}
+            />
+        )
+    }
+    handleOnScroll = event => {
+        this.setState({
+          scrollOffset: event.nativeEvent.contentOffset.y,
+        });
+    };
+
+    handlePesan(){
+        console.log('handle Pesan');
+    }
+    
+    handleScrollTo = p => {
+        if (this.scrollViewRef) {
+          this.scrollViewRef.scrollTo(p);
+        }
+    };
+}
+const mapStateToProps = (state) => ({
+    user: state.user || {},
+    typecar:state.main.typecar || {}
+});
+const mapDispatchToProps ={
+    ...mainActions
 }
 
-Rental.PropTypes = {
+
+Rental.propTypes = {
     navigation: PropTypes.shape({
-        dispatch: PropTypes.func,
+      dispatch: PropTypes.func,
     }).isRequired,
-    region: PropTypes.object
-}
+};
 
 const styles = StyleSheet.create({
     wrapper:{
@@ -64,7 +132,9 @@ const styles = StyleSheet.create({
     },
     formContainer:{
         position:'absolute',
-        bottom:0
+        bottom:0,
+        backgroundColor:Colors.white,
+        width:width
     },
     form:{
         backgroundColor:Colors.white,
@@ -72,10 +142,50 @@ const styles = StyleSheet.create({
         paddingBottom:5,
         paddingLeft:2,
         paddingRight:5,
-        alignContent:'center'
+        alignContent:'center',
+        
+    },
+    textInput: {
+        display: 'flex',
+        marginTop: 11,
+        marginLeft: 44,
+        color: Colors.gray02,
     },
     header:{
         alignItems:'center',
         justifyContent:'center'
-    }
+    },
+    button: {
+        backgroundColor: "lightblue",
+        padding: 12,
+        margin: 16,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 4,
+        borderColor: "rgba(0, 0, 0, 0.1)",
+    },
+    modalContent: {
+        backgroundColor: "white",
+        padding: 0,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 4,
+        borderColor: "rgba(0, 0, 0, 0.1)",
+    },
+    inputWrapper:{
+        display: 'flex',
+        borderWidth: 1,
+        borderColor: Colors.gray03,
+        backgroundColor: Colors.white,
+        shadowColor: 'rgba(0,0,0,0.1)',
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.7,
+        shadowRadius: 10,
+        borderRadius: 3,
+        height: 40,
+        marginTop: 28,
+        marginLeft: 21,
+        marginRight: 21,
+    },
 })
+export default connect(mapStateToProps,mapDispatchToProps)(Rental)

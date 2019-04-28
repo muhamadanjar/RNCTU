@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import HeaderComponent from '../components/HeaderComponent'
 import FAIcon from 'react-native-vector-icons/FontAwesome'
-import Swiper from 'react-native-swiper'
 import Promo from '../components/mobil/promo'
 // import { graphql } from 'react-apollo';
 // import gql from 'graphql-tag';
@@ -84,7 +83,7 @@ class ExploreContainer extends Component {
       <View style={styles.wrapper}>
         {/* <SearchBar /> */}
         
-        <HeaderComponent></HeaderComponent>
+        <HeaderComponent text={'Trans Utama'} />
         <ScrollView
           style={styles.scrollview}
           contentContainerStyle={styles.scrollViewContent}
@@ -94,11 +93,11 @@ class ExploreContainer extends Component {
             Selamat Datang di Utama Trans
           </Text>
           <View style={styles.products}>
-            <CircleButton text={'Rental'} handleOnPress={()=>navigate('Rental')} imageSource={require('../assets/img/rental.png')}/>
-            <CircleButton text={'Taxi'} handleOnPress={()=>navigate('Order')} imageSource={require('../assets/img/taxi.png')}/>
+            <CircleButton text={'Rencar'} handleOnPress={()=>navigate('Rental')} imageSource={require('../assets/img/rental.png')}/>
+            <CircleButton text={'Reguler'} handleOnPress={()=>navigate('Order')} imageSource={require('../assets/img/taxi.png')}/>
           </View>
           <View style={styles.categories}>
-            {/* <Categories categories={categoriesList} handleOnPress={()=>navigate('Order')} /> */}
+            <Categories categories={categoriesList} handleOnPress={()=>navigate('Order')} />
           </View>
           {/* {this.renderListings()} */}
         </ScrollView>

@@ -6,6 +6,8 @@ import MapView from 'react-native-maps'
 import { Button } from 'react-native-elements';
 import Colors from '../utils/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome'
+import Categories from '../components/explore/Categories';
+import categoriesList from '../data/categories';
 const {width,height} = Dimensions.get('window')
 
 export class MapContainer extends Component{
@@ -43,7 +45,7 @@ export class MapContainer extends Component{
               >
                 <View style={styles.marker}>
                   <Text style={styles.text}>{selectedPickUp.name}</Text>
-                  <Icon name="chevron-right" size={25}/>
+                  <Icon name="chevron-right" size={10}/>
                 </View>
               </MapView.Marker>
             }
@@ -54,7 +56,7 @@ export class MapContainer extends Component{
               >
                 <View style={styles.marker}>
                   <Text style={styles.text}>{selectedPickUp.name}</Text>
-                  <Icon name="chevron-right" size={25}/>
+                  <Icon name="chevron-right" size={10}/>
                 </View>
               </MapView.Marker>
 
@@ -63,6 +65,7 @@ export class MapContainer extends Component{
           {this.props.fare &&
           <View style={styles.infoBox}>
             <View style={styles.infoWrapper}>
+              <Categories categories={categoriesList} handleOnPress={()=>navigate('Order')} />
               <View style={{padding:5,alignItems:'center'}}>
                 <Text style={{fontSize:25}}>{this.props.fare}</Text>
               </View>
