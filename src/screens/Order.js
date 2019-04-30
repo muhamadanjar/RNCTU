@@ -32,7 +32,8 @@ class Order extends Component{
       super(props)
     }
     componentDidMount() {
-      this.props.getPromo()
+      this.props.getPromo();
+      this.props.getTypeCar();
   		var rx = this;
       this.props.getCurrentLocation();
       RNGooglePlaces.getCurrentPlace(['placeID', 'location', 'name', 'address'])

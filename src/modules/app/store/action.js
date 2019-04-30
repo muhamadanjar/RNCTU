@@ -5,22 +5,27 @@ export function getPromo(){
     return async (dispatch)=>{
         HTTP.get(PROMO_GET).then((res)=>{
             let response = res.data;
-            return { 
+            dispatch ({ 
                 type:GET_PROMO,
                 payload:response.data
-            }
+            })
             
         }).catch((err)=>console.log(err));
     }
 }
 export function getTypeCar(){
-    return (dispatch)=>{
+    return async (dispatch)=>{
+        
+        
         HTTP.get(TYPECAR_GET).then((res)=>{
             let response = res.data;
+            console.log(response);
+            
             dispatch({
                 type:GET_TYPECAR,
                 payload:response.data
             })
-        })
+        }).catch((err)=>dispatch({type:'ERROR_MESSAGE',err}));
     }
 }
+
