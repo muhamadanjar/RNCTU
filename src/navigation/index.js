@@ -3,6 +3,7 @@ import { createAppContainer, createSwitchNavigator,createStackNavigator } from '
 import MainTabNavigator from './MainTab';
 
 import SignUp from '../screens/SignUp'
+import SearchLocation from '../screens/searchLocation'
 import Order from '../screens/Order'
 import Rental from '../screens/Rental'
 import LoggedOut from '../screens/LoggedOut'
@@ -22,6 +23,7 @@ const LoggedInDriver = createStackNavigator({
   LoggedInMain: LoggedInTabNavigator,
   Order:Order,
   Rental:Rental,
+  SearchLocation:SearchLocation,
 },{
   initialRouteName:'LoggedInMain',
   headerMode:'none'

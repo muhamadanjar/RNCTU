@@ -12,6 +12,7 @@
     "@react-native-community/async-storage": "^1.2.1",
     "axios": "^0.18.0",
     "jest-haste-map": "^24.0.0",
+    "lodash": "^4.17.11",
     "map": "^1.0.1",
     "moment": "^2.24.0",
     "native-base": "^2.12.0",

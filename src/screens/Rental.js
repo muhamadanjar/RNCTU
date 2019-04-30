@@ -3,6 +3,8 @@ import { View,Text,TouchableHighlight,TouchableOpacity,StyleSheet,Image,FlatList
 import PropTypes from 'prop-types'
 import HeaderComponent from '../components/HeaderComponent'
 import Colors from '..//utils/Colors'
+import TypeMobil from '../components/mobil/typemobil'
+import categoriesList from '../data/categories';
 import * as mainActions from '../modules/app/store/action'
 import Modal from 'react-native-modal'
 import { connect } from 'react-redux';
@@ -39,6 +41,9 @@ class Rental  extends Component{
                         <Text style={{fontSize:20}}>dapatkan mobil dan supir untuk durasi yang anda inginkan</Text>
                     </View>
                 </View>
+                <View style={styles.typemobil}>
+                    <TypeMobil typem={categoriesList} handleOnPress={()=>console.log('type mobil di klik')} />
+                </View>
                 <View style={styles.formContainer}>
                     <View style={styles.inputWrapper}>
                         <Text style={styles.textInput}>{this.state.durationPesan}</Text>
@@ -64,7 +69,6 @@ class Rental  extends Component{
     );
     renderModalContent = (listItems) => {
         console.log(listItems);
-        
         return(
         <View style={styles.modalContent}>
             {/* <FlatList
@@ -187,5 +191,8 @@ const styles = StyleSheet.create({
         marginLeft: 21,
         marginRight: 21,
     },
+    typemobil:{
+        marginBottom: 40,
+    }
 })
 export default connect(mapStateToProps,mapDispatchToProps)(Rental)

@@ -98,7 +98,8 @@ const mapStateToProps = (state) => ({
 	booking:state.mobil.booking || {},
 	nearByDrivers:state.mobil.nearByDrivers || [],
 	mobilavailable:state.mobil.mobilavailable || {},
-	user:state.auth.user || {},
+  user:state.auth.user || {},
+  routeCoordinates:state.routeCoordinates || [],
 });
 // const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
 const mapDispatchToProps = {
