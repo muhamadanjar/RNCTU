@@ -22,19 +22,24 @@ if (size === 'small') {
 
 export default class TypeMobil extends Component {
   get Categories() {
-    const { typem, handleOnPress } = this.props;
+    const { typem, select_car } = this.props;
+    console.log(typem);
+    
+    if(typeof typem !== 'undefined' && typem.length>0){
     return typem.map((category, index) => (
       <TouchableHighlight
         style={styles.card}
         key={`category-item-${index}`}
-        onPress={handleOnPress}
+        onPress={select_car(category.rp_id)}
       >
-        <Image
-          source={category.photo}
-          style={styles.image}
-        />
+        
+        <Text>{category.type}</Text>
       </TouchableHighlight>
     ));
+    }else{
+      return null;
+    }
+    
   }
 
   render() {

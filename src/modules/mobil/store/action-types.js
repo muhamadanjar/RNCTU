@@ -19,6 +19,7 @@ export const BOOK_CAR = 'BOOK_CAR'
 export const BOOKING_CANCELED = 'BOOKING_CANCELED'
 export const BOOKING_CONFIRMED = 'BOOKING_CONFIRMED'
 export const GET_FARE = 'GET_FARE'
+export const UPDATE_LOCATION = 'UPDATE_LOCATION'
 
 
 export default {

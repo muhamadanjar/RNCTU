@@ -115,12 +115,13 @@ class Rental  extends Component{
                         <Text style={{fontSize:20}}>dapatkan mobil dan supir untuk durasi yang anda inginkan</Text>
                     </View>
                 </View>
-                <View style={styles.typemobil}>
-                    <TypeMobil typem={categoriesList} handleOnPress={()=>console.log('type mobil di klik')} />
-                </View>
+                
                 <View style={styles.formContainer}>
                     <View style={styles.inputWrapper}>
                         <Text style={styles.textInput}>{this.state.durationPesan}</Text>
+                    </View>
+                    <View style={styles.typemobil}>
+                        <TypeMobil typem={this.props.typecar} select_car={this.props._selectedTypeCar} />
                     </View>
                     {this.renderButton('Pilih',()=>this.setState({visibleModal:1}))}
                     {this.renderButton('Pesan',()=>this.handlePesan())}
@@ -192,9 +193,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps ={
     ...mainActions
 }
-
-
-
 
 
 export default connect(mapStateToProps,mapDispatchToProps)(Rental)

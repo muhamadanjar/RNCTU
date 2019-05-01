@@ -97,7 +97,7 @@ class ExploreContainer extends Component {
             <CircleButton text={'Reguler'} handleOnPress={()=>navigate('Order')} imageSource={require('../assets/img/taxi.png')}/>
           </View>
           <View style={styles.categories}>
-            <Categories categories={categoriesList} handleOnPress={()=>navigate('Order')} />
+            {/* <Categories categories={categoriesList} handleOnPress={()=>navigate('Order')} /> */}
           </View>
           {/* {this.renderListings()} */}
         </ScrollView>

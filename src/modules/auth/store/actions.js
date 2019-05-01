@@ -49,9 +49,15 @@ import AsyncStorage from '@react-native-community/async-storage';
             dispatch({type:AUTH_LOGIN,payload});
             return true;
           }
-        }).catch((error)=>console.log(error));    
+          return false;
+        }).catch((error)=>{
+          dispatch({type:'ERROR_MESSAGE'})
+          throw error;
+        });    
       } catch (error) {
+        dispatch({type:'ERROR_MESSAGE'})
         console.log(error)
+        throw error;
       }
     }
     ;
