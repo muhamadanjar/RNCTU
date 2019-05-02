@@ -1,6 +1,6 @@
 
 // export const BASE_URL = 'http://rental.example.com'
-export const BASE_URL = 'http://192.168.1.32'
+export const BASE_URL = 'http://192.168.43.110'
 export const API_VERSION = 'api'
 export const MOBIL = 'mobil'
 export const BOOKING = 'booking'

@@ -28,7 +28,7 @@ export function getTypeCar(){
 }
 export function _selectedTypeCar(type){
     return dispatch =>{
-        dispatch({type:SELECTED_TYPE_CAR,type})
+        dispatch({type:SELECTED_TYPE_CAR,payload:type})
     }
 }
 export function selectedRp(rp){
