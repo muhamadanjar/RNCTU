@@ -15,7 +15,8 @@ import {
     BOOK_CAR,
     GET_NEARBY_DRIVERS,
     GET_ADDRESS_PREDICTIONS,
-    GET_FARE
+    GET_FARE,
+    POST_RENTCAR
   } from './action-types';
   import HTTP from '../../../utils/Http'
   import {calculateFare,calculateFareInKM} from '../../../utils/fareCalculator'
@@ -382,5 +383,18 @@ import {
               console.log('ERROR',error)
               dispatch(userFailure(auth,error))
           })
+    }
+  }
+  export function postRentCar(){
+    return async (dispatch,getState) =>{
+      let state = getState();
+      try {
+        let data = state.mobil;
+        let res = await HTTP.post(POST_RENTCAR)  
+      } catch (error) {
+        dispatch({type:'ERROR_MESSAGE',error})
+        throw error
+      }
+      
     }
   }

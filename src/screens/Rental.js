@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { View,Text,TouchableHighlight,TouchableOpacity,StyleSheet,Image,FlatList,Dimensions } from 'react-native'
+import { View,Text,TouchableHighlight,ScrollView    ,TouchableOpacity,StyleSheet,Image,FlatList,Dimensions } from 'react-native'
 import PropTypes from 'prop-types'
 import HeaderComponent from '../components/HeaderComponent'
 import Colors from '..//utils/Colors'
 import TypeMobil from '../components/mobil/typemobil'
 import categoriesList from '../data/categories';
 import * as mainActions from '../modules/app/store/action'
+import * as mobilActions from '../modules/mobil/store/actions'
 import Modal from 'react-native-modal'
 import { connect,bindActionCreators } from 'react-redux';
 import transparentHeaderStyle from '../utils/navigation.styles'
@@ -84,7 +85,34 @@ const styles = StyleSheet.create({
     },
     typemobil:{
         marginBottom: 40,
-    }
+    },
+    bottomModal: {
+        justifyContent: 'flex-end',
+        margin: 0,
+    },
+    scrollableModal: {
+        height: 300,
+    },
+    scrollableModalContent1: {
+        height: 200,
+        backgroundColor: '#87BBE0',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    scrollableModalText1: {
+        fontSize: 20,
+        color: 'white',
+    },
+    scrollableModalContent2: {
+        height: 200,
+        backgroundColor: '#A9DCD3',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    scrollableModalText2: {
+        fontSize: 20,
+        color: 'white',
+    },
 })
 class Rental  extends Component{
     constructor(props){
@@ -99,6 +127,7 @@ class Rental  extends Component{
     }
     componentDidMount(){
         this.props.getTypeCar();
+        this.props.getRentPackage(1);
     }
     render(){
         return(
@@ -121,13 +150,29 @@ class Rental  extends Component{
                         <Text style={styles.textInput}>{this.state.durationPesan}</Text>
                     </View>
                     <View style={styles.typemobil}>
-                        <TypeMobil typem={this.props.typecar} select_car={this.props._selectedTypeCar} />
+                        <TypeMobil typem={this.props.typecar} {...this.props} />
                     </View>
-                    {this.renderButton('Pilih',()=>this.setState({visibleModal:1}))}
+                    {this.renderButton('Pilih',()=>this.setState({visibleModal:'scrollable'}))}
                     {this.renderButton('Pesan',()=>this.handlePesan())}
-                    <Modal isVisible={this.state.visibleModal === 1}>
-                        {this.renderModalContent(this.props.typecar)}
-                    </Modal>
+                    <Modal
+                        isVisible={this.state.visibleModal === 'scrollable'}
+                        onSwipeComplete={() => this.setState({ visibleModal: null })}
+                        swipeDirection="down"
+                        scrollTo={this.handleScrollTo}
+                        scrollOffset={this.state.scrollOffset}
+                        scrollOffsetMax={400 - 300} // content height - ScrollView height
+                        style={styles.bottomModal}
+                        >
+                        <View style={styles.scrollableModal}>
+                            <ScrollView
+                            ref={ref => (this.scrollViewRef = ref)}
+                            onScroll={this.handleOnScroll}
+                            scrollEventThrottle={16}
+                            >
+                                {this.renderModalContent(this.props.rp)}
+                            </ScrollView>
+                        </View>
+                        </Modal>
                 </View>
             </View>
         )
@@ -145,23 +190,24 @@ class Rental  extends Component{
     renderModalContent = (listItems) => {
         console.log(listItems);
         return(
-        <View style={styles.modalContent}>
-            {/* <FlatList
+            <FlatList
                 style={{ backgroundColor: this.state.searchBarFocused ? Colors.blue3 : 'white' }}
                 data={listItems}
                 renderItem={({ item }) => this.renderItem(item)}
-                keyExtractor={(item, index) => index.toString()}/> */}
-            
-          {this.renderButton("Tutup", () => this.setState({ visibleModal: null }))}
-        </View>
+                keyExtractor={(item, index) => index.toString()}/>
+        
     )};
     renderItem = (item)=>{
         return(
+            
             <ListItem
             roundAvatar
-            title={`${item.type}`}
-            avatar={{ uri: item.image }}
+            title={`${item.rp_name}`}
+            onPress={()=>{
+                this.props.selectedRp(item.rp_id);this.setState({visibleModal:null})
+            }}
             />
+          
         )
     }
     handleOnScroll = event => {
@@ -171,7 +217,8 @@ class Rental  extends Component{
     };
 
     handlePesan(){
-        console.log('handle Pesan');
+        console.log('Handle Post Rencar');
+        this.props.postRentCar();
     }
     
     handleScrollTo = p => {
@@ -187,11 +234,15 @@ Rental.propTypes = {
 };
 const mapStateToProps = (state) => ({
     user: state.user || {},
-    typecar:state.main.typecar || {}
+    typecar:state.main.typecar || {},
+    rp:state.main.rp || {},
+    selectedTypeCar:state.main.selectedTypeCar,
+    selectedRP:state.main.selectedRP
 });
 // const mapDispatchToProps = dispatch => bindActionCreators(mainActions, dispatch);
 const mapDispatchToProps ={
-    ...mainActions
+    ...mainActions,
+    ...mobilActions
 }
 
 

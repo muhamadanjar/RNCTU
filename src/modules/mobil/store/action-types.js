@@ -20,7 +20,7 @@ export const BOOKING_CANCELED = 'BOOKING_CANCELED'
 export const BOOKING_CONFIRMED = 'BOOKING_CONFIRMED'
 export const GET_FARE = 'GET_FARE'
 export const UPDATE_LOCATION = 'UPDATE_LOCATION'
-
+export const POST_RENTCAR = 'POST_RENTCAR'
 
 export default {
   AUTH_CHECK,
@@ -43,5 +43,6 @@ export default {
   BOOK_CAR,
   BOOKING_CANCELED,
   BOOKING_CONFIRMED,
-  GET_FARE
+  GET_FARE,
+  POST_RENTCAR
 }

@@ -22,7 +22,7 @@ if (size === 'small') {
 
 export default class TypeMobil extends Component {
   get Categories() {
-    const { typem, select_car } = this.props;
+    const { typem, onHandlePress } = this.props;
     console.log(typem);
     
     if(typeof typem !== 'undefined' && typem.length>0){
@@ -30,9 +30,8 @@ export default class TypeMobil extends Component {
       <TouchableHighlight
         style={styles.card}
         key={`category-item-${index}`}
-        onPress={select_car(category.rp_id)}
-      >
-        
+        onPress={()=>this.props._selectedTypeCar(category.id)}
+      > 
         <Text>{category.type}</Text>
       </TouchableHighlight>
     ));

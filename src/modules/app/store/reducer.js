@@ -1,11 +1,19 @@
 import {
   GET_PROMO,
-  GET_TYPECAR
+  GET_TYPECAR,
+  GET_RENT_PACKAGE,
+  GET_SETTINGS,
+  SELECTED_TYPE_CAR,
+  SELECTED_RENT_PACKAGE
 } from './action-types';
+import update from 'react-addons-update'
 const initialState = {
   isAuthenticated: false,
   user:{},
-  promo:{}
+  promo:{},
+  rp:{},
+  selectedTypeCar:null,
+  selectedRP:null
 };
 
 const reducer = (state = initialState, { type, payload = null }) => {
@@ -14,6 +22,24 @@ const reducer = (state = initialState, { type, payload = null }) => {
         return getPromo(state,payload);
       case GET_TYPECAR:
         return getTypeCar(state,payload);
+      case GET_RENT_PACKAGE:
+        return update(state,{
+          rp:{
+            $set:payload
+          }
+        })
+      case SELECTED_TYPE_CAR:
+        return update(state,{
+          selectedTypeCar:{
+            $set:payload
+          }
+        })
+      case SELECTED_RENT_PACKAGE:
+      return update(state,{
+        selectedRP:{
+          $set:payload
+        }
+      })
       default:
         return state;
     }

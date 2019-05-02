@@ -1,5 +1,5 @@
 import HTTP from '../../../utils/Http'
-import {GET_PROMO,GET_TYPECAR,SELECTED_TYPE_CAR,GET_RENT_PACKAGE} from './action-types'
+import {GET_PROMO,GET_TYPECAR,SELECTED_TYPE_CAR,GET_RENT_PACKAGE,SELECTED_RENT_PACKAGE} from './action-types'
 import {PROMO_GET,TYPECAR_GET,RENT_GET} from '../../../utils/config'
 export function getPromo(){
     return async (dispatch)=>{
@@ -31,15 +31,22 @@ export function _selectedTypeCar(type){
         dispatch({type:SELECTED_TYPE_CAR,type})
     }
 }
+export function selectedRp(rp){
+    return dispatch =>{
+        dispatch({type:SELECTED_RENT_PACKAGE,payload:rp})
+    }
+}
 
-export function getRentPackage(){
+export function getRentPackage(a){
     return async (dispatch,getState) =>{
         let rstate = getState();
-        
         try {
-            let res = await HTTP.get(`${RENT_GET}/${rstate.main.selectedTypeCar}`);
-            console.log(res);
-            dispatch({type:'GET_RENT_PACKAGE',res});
+            let res = await HTTP.get(`${RENT_GET}/${a}`);
+            let response =  res.data;
+            if (response.status) {
+                dispatch({type:GET_RENT_PACKAGE,payload:response.data});    
+            }
+            
         } catch (error) {
             dispatch({type:'ERROR_MESSAGE',error});
         }
