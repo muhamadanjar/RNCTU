@@ -47,7 +47,7 @@ import AsyncStorage from '@react-native-community/async-storage';
             payload.isAuthenticated = true;
             HTTP.defaults.headers.common['Authorization'] = `Bearer ${payload}`;  
             dispatch({type:AUTH_LOGIN,payload});
-            return true;
+            
           }
           return false;
         }).catch((error)=>{

@@ -10,7 +10,8 @@ import * as mobilActions from '../modules/mobil/store/actions'
 import Modal from 'react-native-modal'
 import { connect,bindActionCreators } from 'react-redux';
 import transparentHeaderStyle from '../utils/navigation.styles'
-import { ListItem } from 'react-native-elements';
+import { ListItem,Header } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome'
 const {width,height} = Dimensions.get('window');
 const styles = StyleSheet.create({
     wrapper:{
@@ -113,6 +114,22 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: 'white',
     },
+    popupButtons: {
+        marginTop: 15,
+        flexDirection: 'row',
+        borderTopWidth: 1,
+        borderColor: "#eee",
+        justifyContent:'center'
+    },
+    popupButton: {
+        flex: 1,
+        marginVertical: 16
+    },
+        btnClose:{
+        height:20,
+        backgroundColor:'#20b2aa',
+        padding:20
+    },
 })
 class Rental  extends Component{
     constructor(props){
@@ -127,16 +144,19 @@ class Rental  extends Component{
     }
     componentDidMount(){
         this.props.getTypeCar();
-        this.props.getRentPackage(1);
+    }
+    setModalVisible(visible) {
+        console.log(this.state);
+        this.setState({visibleModal: visible});
     }
     render(){
         return(
             <View style={styles.wrapper}>
-                <HeaderComponent 
-                navigation={this.props.navigation}
-                icon={'arrow-left'}
-                IconOnpress={()=>this.props.navigation.goBack()} 
-                text={'Rencar'}/>
+                <Header
+                leftComponent={{ icon: 'chevron-left', color: '#fff' }}
+                centerComponent={{ text: 'Rencar', style: { color: '#fff' } }}
+                rightComponent={{ icon: 'home', color: '#fff' }}
+                />
                 <View style={styles.imageContainer}>
                     <Image style={styles.image} source={require('../assets/img/rental.png')}/>
                     <View style={{paddingLeft:5,marginTop:20,alignContent:'center',alignItems:'center',justifyContent:'center'}}>
@@ -152,10 +172,11 @@ class Rental  extends Component{
                     <View style={styles.typemobil}>
                         <TypeMobil typem={this.props.typecar} {...this.props} />
                     </View>
-                    {this.renderButton('Pilih',()=>this.setState({visibleModal:'scrollable'}))}
+                    {this.renderButton('Pilih',()=>this.setState({visibleModal:true}))}
                     {this.renderButton('Pesan',()=>this.handlePesan())}
                     <Modal
-                        isVisible={this.state.visibleModal === 'scrollable'}
+                        isVisible={this.state.visibleModal === true}
+                        onRequestClose={() => { this.setState({ visibleModal:null }) } }
                         onSwipeComplete={() => this.setState({ visibleModal: null })}
                         swipeDirection="down"
                         scrollTo={this.handleScrollTo}
@@ -163,6 +184,12 @@ class Rental  extends Component{
                         scrollOffsetMax={400 - 300} // content height - ScrollView height
                         style={styles.bottomModal}
                         >
+                        <TouchableOpacity
+                            onPress={() => {
+                                this.setState({visibleModal: false})
+                            } }>
+                            <Icon name={'chevron-left'} size={25} style={[styles.modalBackIcon]} />
+                        </TouchableOpacity>
                         <View style={styles.scrollableModal}>
                             <ScrollView
                             ref={ref => (this.scrollViewRef = ref)}
@@ -171,6 +198,12 @@ class Rental  extends Component{
                             >
                                 {this.renderModalContent(this.props.rp)}
                             </ScrollView>
+
+                        </View>
+                        <View style={styles.popupButtons}>
+                            <TouchableOpacity onPress={() => {this.setModalVisible(false) }} style={styles.btnClose}>
+                            <Text style={styles.txtClose}>Close</Text>
+                            </TouchableOpacity>
                         </View>
                         </Modal>
                 </View>

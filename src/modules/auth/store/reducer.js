@@ -15,6 +15,7 @@ import {BASE_URL,API_VERSION,LOGIN_URL,REGISTER} from '../../../utils/config'
 import AsyncStorage from '@react-native-community/async-storage';
 import usersample from '../../../data/user.json';
 import { registerAnimation } from 'react-native-animatable';
+import update from 'react-addons-update'
 const initialState = {
   isAuthenticated: false,
 };
@@ -44,9 +45,10 @@ const reducer = (state = initialState, { type, payload = null }) => {
 };
 
 function login(state, payload) {
-    return {
-        ...state, payload,
-    }
+    
+    return update(state,{
+      user:payload
+    })
 }
 function register(state,  payload){
  return {...state,payload}

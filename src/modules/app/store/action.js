@@ -14,11 +14,11 @@ export function getPromo(){
     }
 }
 export function getTypeCar(){
-    return async (dispatch)=>{
+    return async (dispatch,getState)=>{
+        let state = getState();
         HTTP.get(TYPECAR_GET).then((res)=>{
             let response = res.data;
             console.log(response);
-            
             dispatch({
                 type:GET_TYPECAR,
                 payload:response.data
@@ -27,8 +27,12 @@ export function getTypeCar(){
     }
 }
 export function _selectedTypeCar(type){
-    return dispatch =>{
+    return (dispatch,getState) =>{
+        let state = getState();
         dispatch({type:SELECTED_TYPE_CAR,payload:type})
+        setTimeout(()=>{
+            dispatch(getRentPackage(state.main.selectedTypeCar))
+        },2000);
     }
 }
 export function selectedRp(rp){
