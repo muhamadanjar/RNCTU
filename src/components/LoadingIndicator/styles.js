@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native"
 import { Dimensions } from "react-native"
-
+import {Colors} from '../../utils'
 const { height, width } = Dimensions.get("window")
 const styles = {
   container: {
@@ -8,7 +8,7 @@ const styles = {
     flexDirection: "column",
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#FF5E3A"
+    backgroundColor: Colors.blue
   },
   text: {
     color: "white"

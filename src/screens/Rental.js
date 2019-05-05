@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { View,Text,TouchableHighlight,ScrollView    ,TouchableOpacity,StyleSheet,Image,FlatList,Dimensions } from 'react-native'
+import { View,Text,TouchableHighlight,ScrollView,TouchableOpacity,StyleSheet,Image,FlatList,Dimensions } from 'react-native'
 import PropTypes from 'prop-types'
 import HeaderComponent from '../components/HeaderComponent'
-import Colors from '..//utils/Colors'
+
+import {Colors,carTypes} from '../utils'
 import TypeMobil from '../components/mobil/typemobil'
 import categoriesList from '../data/categories';
 import * as mainActions from '../modules/app/store/action'
@@ -12,7 +13,9 @@ import { connect,bindActionCreators } from 'react-redux';
 import transparentHeaderStyle from '../utils/navigation.styles'
 import { ListItem,Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import {Footer,FooterTab} from 'native-base'
+import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
+import {Footer,FooterTab,Button,Container} from 'native-base'
+import LoadingIndicator from '../components/LoadingIndicator'
 const {width,height} = Dimensions.get('window');
 const styles = StyleSheet.create({
     wrapper:{
@@ -135,6 +138,17 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         position: 'absolute',
         bottom: 35
+    },
+    title: {
+        fontSize: 6
+    },
+    footerContainer:{
+        position: 'absolute',
+        height:50, 
+        left: 0, 
+        right: 0, 
+        bottom: 0,
+        backgroundColor:Colors.blue2
     }
 })
 class Rental  extends Component{
@@ -147,8 +161,11 @@ class Rental  extends Component{
             durationPesan:null,
             durationList:null
         }
+        console.log(carTypes);
+        
     }
     componentDidMount(){
+        this.props.getCurrentLocation();
         this.props.getTypeCar();
     }
     setModalVisible(visible) {
@@ -156,11 +173,19 @@ class Rental  extends Component{
         this.setState({visibleModal: visible});
     }
     render(){
+        if(this.props.region == null){
+            return this.renderLoading()
+        }
+        return this.renderRental()
+        
+
+    }
+    renderRental(){
         return(
-            <View style={styles.wrapper}>
+            <Container>
                 <Header
-                leftComponent={{ icon: 'chevron-left', color: '#fff' }}
-                centerComponent={{ text: 'Rencar', style: { color: '#fff' } }}
+                leftComponent={<TouchableOpacity onPress={()=>this.props.navigation.goBack()}><Icon name={'chevron-left'} size={20}/></TouchableOpacity>}
+                centerComponent={<Text style={{fontSize:20}}>RentCar</Text>}
                 rightComponent={{ icon: 'home', color: '#fff' }}
                 />
                 <View style={styles.imageContainer}>
@@ -176,9 +201,9 @@ class Rental  extends Component{
                     <View style={styles.typemobil}>
                         <TypeMobil typem={this.props.typecar} {...this.props} />
                     </View>
-                    <View style={styles.inputWrapper}>
+                    {/* <View style={styles.inputWrapper}>
                         <Text style={styles.textInput}>{this.state.durationPesan}</Text>
-                    </View>
+                    </View> */}
 
                     <Modal
                         isVisible={this.state.visibleModal === true}
@@ -213,18 +238,9 @@ class Rental  extends Component{
                         </View>
                         </Modal>
                 </View>
-                <View style={styles.floatingMenuButtonStyle}>
-                    <TouchableHighlight onPress={()=>this.setModalVisible(true)}>
-                        <Text style={styles.textStyle}>This is Bottom View.</Text>
-                    </TouchableHighlight>
-                    {this.renderButton('Pesan',()=>this.handlePesan())}
-                </View>
-                <Footer>
-                    <FooterTab style={styles.footerContainer}>
-                    {taxiTypes.map(type => this.renderTab(type))}
-                    </FooterTab>
-                </Footer>
-            </View>
+                {this.renderFooter()}
+                
+            </Container>
         )
     }
     updateUser = (user) => {
@@ -302,6 +318,38 @@ class Rental  extends Component{
           this.scrollViewRef.scrollTo(p);
         }
     };
+    renderFooter(){
+        return(
+            <View style={styles.footerContainer}>
+                <View style={{flex:1,flexDirection:'row'}}>
+                    <Button onPress={()=>this.setModalVisible(true)} style={{backgroundColor: Colors.blue2,
+                        height:50,
+                        width:width - (width*0.5),
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center'}}>
+                        <MaterialIcon name={'package'} size={25}/>
+                        <Text style={{marginLeft:10,fontSize:24,color: 'white'}}>Pilih</Text>
+                    </Button>
+                    <Button onPress={()=>this.handlePesan()} style={{backgroundColor: Colors.blue2,
+                        height:50,
+                        width:width - (width*0.5),
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center'}}>
+                        <Icon name={'car'} size={25}/>
+                        <Text style={{marginLeft:10,fontSize:24,color: 'white'}}>Pesan</Text>
+                    </Button>
+                    
+                </View>
+                
+            </View>
+        )
+    }
+
+    renderLoading(){
+        return <LoadingIndicator/>
+    }
 }
 Rental.propTypes = {
     navigation: PropTypes.shape({
@@ -310,6 +358,7 @@ Rental.propTypes = {
 };
 const mapStateToProps = (state) => ({
     user: state.user || {},
+    region:state.mobil.region,
     typecar:state.main.typecar || {},
     rp:state.main.rp || {},
     selectedTypeCar:state.main.selectedTypeCar,

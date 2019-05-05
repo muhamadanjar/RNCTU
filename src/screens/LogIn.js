@@ -30,7 +30,7 @@ class LogIn extends Component {
       text="Forgot Password"
     />,
     headerLeft: <NavBarButton
-      handleButtonPress={() => navigation.goBack()}
+      handleButtonPress={() => navigation.navigate('Main')}
       location="left"
       icon={<Icon name="angle-left" color={colors.white} size={30} />}
     />,

@@ -11,6 +11,7 @@ export const AUTH_LOGIN_GOOGLE = 'AUTH_LOGIN_GOOGLE'
 export const AUTH_ALERT = 'AUTH_ALERT'
 export const AUTH_REGISTER = 'AUTH_REGISTER'
 export const SYNC_DATA = 'SYNC_DATA'
+
 export default {
   AUTH_CHECK,
   AUTH_LOGIN,

@@ -157,9 +157,11 @@ import AsyncStorage from '@react-native-community/async-storage';
       try {
         const isSignedIn = await GoogleSignin.isSignedIn();
         const userInfo = await GoogleSignin.signInSilently();
-        console.log(userInfo);
+        console.log(isSignedIn,userInfo);
+        dispatch({type:AUTH_LOGIN_GOOGLE,payload:userInfo})
       } catch (error) {
         console.error(error);
+        throw error
       }
     }
     

@@ -16,7 +16,8 @@ import {
     GET_NEARBY_DRIVERS,
     GET_ADDRESS_PREDICTIONS,
     GET_FARE,
-    POST_RENTCAR
+    POST_RENTCAR,
+    SET_SELECTED_TAXI_TYPE
   } from './action-types';
   import HTTP from '../../../utils/Http'
   import {calculateFare,calculateFareInKM} from '../../../utils/fareCalculator'
@@ -389,12 +390,30 @@ import {
     return async (dispatch,getState) =>{
       let state = getState();
       try {
-        let data = state.mobil;
-        let res = await HTTP.post(POST_RENTCAR)  
+        let data = {
+          trip_address_destination:'Cibinong, Bogor, West Java, Indonesia',
+          trip_des_latitude:state.mobil.region.latitude,
+          trip_des_longitude:state.mobil.region.longitude,
+          trip_bookby:state.main.user.id,
+          trip_total:state.mobil.fareRental,
+          duration:state.mobil.distanceMatrix.duration,
+          distance:state.mobil.distanceMatrix.distance,
+          rent_package:state.main.selectedRP,
+        }
+        let res = await HTTP.post(POST_RENTCAR,data)
+        console.log(res);
+
       } catch (error) {
         dispatch({type:'ERROR_MESSAGE',error})
         throw error
       }
       
+    }
+  }
+
+  export function setSelectedTaxiTypeAction(taxiType) {
+    return {
+      type: SET_SELECTED_TAXI_TYPE,
+      payload: taxiType
     }
   }

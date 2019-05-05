@@ -28,12 +28,18 @@ const LoggedInDriver = createStackNavigator({
   initialRouteName:'LoggedInMain',
   headerMode:'none'
 })
+const AuthNavigator = createStackNavigator({
+  LogIn: LogIn,
+  SignUp: SignUp,
+  ForgotPassword:ForgotPassword,
+},{
+  initialRouteName:'LogIn'
+})
 export default createAppContainer(createSwitchNavigator({
   Main: LoggedOut,
   LoggedIn: LoggedInCustomer,
-  Auth: LogIn,
-  SignUp: SignUp,
+  Auth: AuthNavigator,
   TurnOnNotifications:TurnOnNotifications,
-  ForgotPassword:ForgotPassword,
+  
   
 }));

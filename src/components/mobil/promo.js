@@ -6,11 +6,13 @@ export default class Promo extends Component{
         super(props)
     }
     render(){
+        const {listPromo} = this.props
         return(
             <Swiper
             autoplay={true}
             style={styles.swiper}>
-            <View style={styles.container}>
+            {listPromo.length>0 && listPromo.map((item)=>this.renderList(item))}
+            {/* <View style={styles.container}>
                 <Image
                     style={{ flex: 1, height: 200, width: null, resizeMode: 'contain' }}
                     source={require('../../assets/swiper/swiper_1.jpg')} />
@@ -29,8 +31,17 @@ export default class Promo extends Component{
                 <Image
                     style={styles.image}
                     source={require('../../assets/swiper/swiper_4.jpg')} />
-            </View>
+            </View> */}
         </Swiper>
+        )
+    }
+    renderList(promo){
+        return(
+            <View style={styles.container} key={promo.id}>
+                <Image
+                    style={styles.image}
+                    source={{uri:promo.image_path}} />
+            </View>
         )
     }
 }

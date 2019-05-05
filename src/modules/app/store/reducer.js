@@ -47,7 +47,7 @@ const reducer = (state = initialState, { type, payload = null }) => {
 
 function getPromo(state,payload){
     return {...state,
-        promo:response.data
+        promo:payload
     }
 }
 

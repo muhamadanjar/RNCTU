@@ -9,10 +9,11 @@ import {
   StatusBar
 } from 'react-native';
 import HeaderComponent from '../components/HeaderComponent'
-import FAIcon from 'react-native-vector-icons/FontAwesome'
+import { connect } from 'react-redux'
 import Promo from '../components/mobil/promo'
 // import { graphql } from 'react-apollo';
 // import gql from 'graphql-tag';
+import * as appActions from '../modules/app/store/action'
 import SearchBar from '../components/SearchBar';
 import Categories from '../components/explore/Categories';
 import Listings from '../components/explore/Listings';
@@ -75,6 +76,10 @@ class ExploreContainer extends Component {
     ));
   }
 
+  componentDidMount(){
+    this.props.getPromo()
+  }
+
   render() {
     const { data,navigation } = this.props;
     const { navigate } = navigation;
@@ -88,7 +93,7 @@ class ExploreContainer extends Component {
           style={styles.scrollview}
           contentContainerStyle={styles.scrollViewContent}
         >
-          <Promo/>
+          <Promo listPromo={this.props.promo}/>
           <Text style={styles.heading}>
             Selamat Datang di Utama Trans
           </Text>
@@ -154,5 +159,12 @@ const styles = StyleSheet.create({
 // `
 
 // const ExploreContainerTab = graphql(ListingsQuery)(ExploreContainer);
-const ExploreContainerTab = ExploreContainer;
+const mapStateToProps = (state) => ({
+  user: state.user || {},
+  promo: state.main.promo
+});
+const mapDispatchToProps = {
+  ...appActions
+}
+const ExploreContainerTab = connect(mapStateToProps,mapDispatchToProps)(ExploreContainer)
 export default ExploreContainerTab;

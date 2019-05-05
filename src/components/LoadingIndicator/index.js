@@ -5,7 +5,7 @@ import { View, Image, Text } from "react-native"
 import Spinner from "react-native-spinkit"
 import styles from "./styles"
 
-const appLogo = require("../../../../assets/img/taxi_logo_white.png")
+const appLogo = require("../../assets/img/taxi_logo_white.png")
 const standardMessage = "Mencari Posisi"
 const longLoadingMessage = "We still working on it"
 const messagePostfixes = ["", ".", "..", "..."]
