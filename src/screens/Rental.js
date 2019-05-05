@@ -12,6 +12,7 @@ import { connect,bindActionCreators } from 'react-redux';
 import transparentHeaderStyle from '../utils/navigation.styles'
 import { ListItem,Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome'
+import {Footer,FooterTab} from 'native-base'
 const {width,height} = Dimensions.get('window');
 const styles = StyleSheet.create({
     wrapper:{
@@ -125,11 +126,16 @@ const styles = StyleSheet.create({
         flex: 1,
         marginVertical: 16
     },
-        btnClose:{
+    btnClose:{
         height:20,
         backgroundColor:'#20b2aa',
         padding:20
     },
+    floatingMenuButtonStyle: {
+        alignSelf: 'flex-end',
+        position: 'absolute',
+        bottom: 35
+    }
 })
 class Rental  extends Component{
     constructor(props){
@@ -166,14 +172,14 @@ class Rental  extends Component{
                 </View>
                 
                 <View style={styles.formContainer}>
-                    <View style={styles.inputWrapper}>
-                        <Text style={styles.textInput}>{this.state.durationPesan}</Text>
-                    </View>
+                    
                     <View style={styles.typemobil}>
                         <TypeMobil typem={this.props.typecar} {...this.props} />
                     </View>
-                    {this.renderButton('Pilih',()=>this.setState({visibleModal:true}))}
-                    {this.renderButton('Pesan',()=>this.handlePesan())}
+                    <View style={styles.inputWrapper}>
+                        <Text style={styles.textInput}>{this.state.durationPesan}</Text>
+                    </View>
+
                     <Modal
                         isVisible={this.state.visibleModal === true}
                         onRequestClose={() => { this.setState({ visibleModal:null }) } }
@@ -207,6 +213,17 @@ class Rental  extends Component{
                         </View>
                         </Modal>
                 </View>
+                <View style={styles.floatingMenuButtonStyle}>
+                    <TouchableHighlight onPress={()=>this.setModalVisible(true)}>
+                        <Text style={styles.textStyle}>This is Bottom View.</Text>
+                    </TouchableHighlight>
+                    {this.renderButton('Pesan',()=>this.handlePesan())}
+                </View>
+                <Footer>
+                    <FooterTab style={styles.footerContainer}>
+                    {taxiTypes.map(type => this.renderTab(type))}
+                    </FooterTab>
+                </Footer>
             </View>
         )
     }
@@ -248,6 +265,32 @@ class Rental  extends Component{
           scrollOffset: event.nativeEvent.contentOffset.y,
         });
     };
+
+    renderTab(tabInfo) {
+        // FIXME using anonymous function is not the good practices,
+        // are there anyway to pass arguments via onPress event?
+        const subTitle = tabInfo.pricing ? `$${tabInfo.pricing}` : tabInfo.title
+        return (
+          <Button vertical key={tabInfo.type} onPress={() => this.onTaxiTypeSelected(tabInfo)}>
+            <Icon size={25} name={tabInfo.icon} style={this.formatTabElement(tabInfo)} />
+            <Text style={this.formatTabElement(tabInfo, styles.type)}>{tabInfo.type}</Text>
+            <Text style={this.formatTabElement(tabInfo, styles.title)}>{subTitle}</Text>
+          </Button>
+        )
+    }
+    formatTabElement(tabInfo, style = {}) {
+        // Clone the styles so that customization will not impacted to template
+        const elementStyle = { ...style }
+        const tabIsActive = this.props.selectedTaxiType === tabInfo
+        elementStyle.color = tabIsActive ? "#FF5E3A" : "grey"
+    
+        return elementStyle
+    }
+    onTaxiTypeSelected = taxiType => {
+        if (taxiType.type !== this.props.selectedTaxiType.type) {
+          this.props.setSelectedTaxiType(taxiType)
+        }
+    }
 
     handlePesan(){
         console.log('Handle Post Rencar');

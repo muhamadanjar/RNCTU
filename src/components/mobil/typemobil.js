@@ -3,10 +3,11 @@ import {
   ScrollView,
   StyleSheet,
   TouchableHighlight,
-  Image,
+  ActivityIndicator,
   View,
   Text,
 } from 'react-native';
+import {Image} from 'react-native-elements'
 import iPhoneSize from '../../utils/dimensions';
 
 const size = iPhoneSize();
@@ -32,7 +33,11 @@ export default class TypeMobil extends Component {
         key={`category-item-${index}`}
         onPress={()=>this.props._selectedTypeCar(category.id)}
       > 
-        <Text>{category.type}</Text>
+        <Image
+          source={{uri:category.path_url}}
+          style={styles.image}
+          PlaceholderContent={<ActivityIndicator/>}
+        />
       </TouchableHighlight>
     ));
     }else{
@@ -40,7 +45,6 @@ export default class TypeMobil extends Component {
     }
     
   }
-
   render() {
   	return (
     <ScrollView

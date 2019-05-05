@@ -8,6 +8,7 @@ export const USER_PROFILE = 'users/profile'
 export const REGISTER = 'register'
 export const LOGIN_URL = 'login'
 export const USER_GET = `${BASE_URL}/${API_VERSION}/user/details`
+export const SYNC_DATA_POST = `${BASE_URL}/${API_VERSION}/user/sync`
 export const LOGIN_POST = `${BASE_URL}/${API_VERSION}/login`
 export const REGISTER_POST = `${BASE_URL}/${API_VERSION}/register`
 export const PROMO_GET = `${BASE_URL}/${API_VERSION}/get_promo`

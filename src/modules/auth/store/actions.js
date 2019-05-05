@@ -8,10 +8,11 @@ import {
     SET_LOGGED_IN_STATE,
     AUTH_LOGIN_SAMPLE,
     AUTH_REGISTER,
-    AUTH_LOGIN_GOOGLE
+    AUTH_LOGIN_GOOGLE,
+    SYNC_DATA
   } from './action-types';
-import { GoogleSignin, GoogleSigninButton,statusCodes } from 'react-native-google-signin';
-import {USER_GET,LOGIN_POST, REGISTER_POST} from '../../../utils/config'
+import { GoogleSignin,statusCodes } from 'react-native-google-signin';
+import {USER_GET,LOGIN_POST, REGISTER_POST,SYNC_DATA_POST} from '../../../utils/config'
 import HTTP from '../../../utils/Http'
 import AsyncStorage from '@react-native-community/async-storage';
   export function authCheck(payload) {
@@ -136,6 +137,7 @@ import AsyncStorage from '@react-native-community/async-storage';
         await GoogleSignin.hasPlayServices();
         const userInfo = await GoogleSignin.signIn();
         console.log(userInfo);
+        dispatch({type:SYNC_DATA,payload:userInfo});  
         dispatch({type:AUTH_LOGIN_GOOGLE,payload:userInfo});  
       } catch (error) {
         console.log(error);
@@ -184,3 +186,15 @@ import AsyncStorage from '@react-native-community/async-storage';
       console.error(error);
     }
   };
+
+  export function sync_data_user(data){
+    return async (dispatch)=>{
+      try {
+        let a = await HTTP.get(SYNC_DATA_POST,data); 
+        dispatch({type:SYNC_DATA,payload:a});
+      } catch (error) {
+        throw error;
+      }
+      
+    }
+  }

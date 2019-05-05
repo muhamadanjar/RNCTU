@@ -58,3 +58,5 @@ export function getRentPackage(a){
 
 }
 
+export function updateLocation(){}
+
