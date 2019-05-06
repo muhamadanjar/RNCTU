@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     bottomModal: {
         justifyContent: 'flex-end',
         margin: 0,
+        backgroundColor:Colors.white
     },
     scrollableModal: {
         height: 300,
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     popupButtons: {
-        marginTop: 15,
+        marginTop: 0,
         flexDirection: 'row',
         borderTopWidth: 1,
         borderColor: "#eee",
@@ -231,11 +232,11 @@ class Rental  extends Component{
                             </ScrollView>
 
                         </View>
-                        <View style={styles.popupButtons}>
-                            <TouchableOpacity onPress={() => {this.setModalVisible(false) }} style={styles.btnClose}>
-                            <Text style={styles.txtClose}>Close</Text>
-                            </TouchableOpacity>
-                        </View>
+                            <View style={styles.popupButtons}>
+                                <TouchableOpacity onPress={() => {this.setModalVisible(false) }} style={styles.btnClose}>
+                                <Text style={styles.txtClose}>Close</Text>
+                                </TouchableOpacity>
+                            </View>
                         </Modal>
                 </View>
                 {this.renderFooter()}
@@ -283,8 +284,6 @@ class Rental  extends Component{
     };
 
     renderTab(tabInfo) {
-        // FIXME using anonymous function is not the good practices,
-        // are there anyway to pass arguments via onPress event?
         const subTitle = tabInfo.pricing ? `$${tabInfo.pricing}` : tabInfo.title
         return (
           <Button vertical key={tabInfo.type} onPress={() => this.onTaxiTypeSelected(tabInfo)}>

@@ -34,7 +34,8 @@ export default class LoadingIndicator extends Component {
     const message = loadingTakesLonger ? longLoadingMessage : standardMessage
     return (
       <View style={styles.container}>
-        <Image source={appLogo} />
+        {/* <Image source={appLogo} /> */}
+        <Text style={styles.appLogoText}>Utama Trans</Text>
         <Spinner
           style={styles.spinner}
           isVisible
