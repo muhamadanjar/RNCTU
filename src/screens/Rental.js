@@ -98,11 +98,11 @@ class Rental  extends Component{
                             </ScrollView>
 
                         </View>
-                        <View style={styles.popupButtons}>
-                            <TouchableOpacity onPress={() => {this.setModalVisible(false) }} style={styles.btnClose}>
-                            <Text style={styles.txtClose}>Close</Text>
-                            </TouchableOpacity>
-                        </View>
+                            <View style={styles.popupButtons}>
+                                <TouchableOpacity onPress={() => {this.setModalVisible(false) }} style={styles.btnClose}>
+                                <Text style={styles.txtClose}>Close</Text>
+                                </TouchableOpacity>
+                            </View>
                         </Modal>
                 </View>
                 {this.renderFooter()}

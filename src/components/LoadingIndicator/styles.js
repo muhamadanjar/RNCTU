@@ -12,6 +12,12 @@ const styles = {
   },
   text: {
     color: "white"
+  },
+  appLogoText:{
+    fontSize:40,
+    fontWeight: '600',
+    fontFamily: 'Roboto',
+    color:Colors.white
   }
 }
 
