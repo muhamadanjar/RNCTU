@@ -52,11 +52,11 @@ import AsyncStorage from '@react-native-community/async-storage';
           }
           return false;
         }).catch((error)=>{
-          dispatch({type:'ERROR_MESSAGE'})
+          dispatch({type:'ERROR_MESSAGE',error})
           throw error;
         });    
       } catch (error) {
-        dispatch({type:'ERROR_MESSAGE'})
+        dispatch({type:'ERROR_MESSAGE',error})
         console.log(error)
         throw error;
       }

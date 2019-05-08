@@ -396,8 +396,6 @@ import {
           trip_des_longitude:state.mobil.region.longitude,
           trip_bookby:state.main.user.id,
           trip_total:state.mobil.fareRental,
-          duration:state.mobil.distanceMatrix.duration,
-          distance:state.mobil.distanceMatrix.distance,
           rent_package:state.main.selectedRP,
         }
         let res = await HTTP.post(POST_RENTCAR,data)

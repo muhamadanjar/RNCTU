@@ -61,10 +61,12 @@ class LogIn extends Component {
     this.setState({ loadingVisible: true });
     const { logIn,authLogin, navigation } = this.props;
     const { navigate } = navigation;
-
+    
     setTimeout(() => {
       const { emailAddress, password } = this.state;
       let payload = {username:emailAddress,password:password};
+      console.log(payload);
+      
       if(authLogin(payload)){
         this.setState({ formValid: true, loadingVisible: false });navigate('TurnOnNotifications');
       }else{this.setState({ formValid: false, loadingVisible: false });}
